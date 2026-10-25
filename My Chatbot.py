@@ -46,6 +46,18 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
     QCheckBox,
+    QMenuBar,
+    QMenu,
+    QToolBar,
+    QAction,
+    QTabWidget,
+    QGroupBox,
+    QSpinBox,
+    QSlider,
+    QTextEdit,
+    QListWidget,
+    QSplitter,
+    QStatusBar,
 )
 
 # Agent and Memory imports
@@ -876,11 +888,17 @@ class ChatBotWindow(QMainWindow):
         # Initialize agent systems
         self.memory = None
         self.tools = None
+        self.rag = None
+        self.gen = None
         self.agent_mode = self.settings.value("agent_mode", True, type=bool)
         if AGENT_AVAILABLE:
             try:
                 self.memory = MemorySystem()
                 self.tools = ToolRegistry()
+                from rag_system import RAGSystem
+                from generation import GenerationEngine
+                self.rag = RAGSystem()
+                self.gen = GenerationEngine()
                 print("Agent systems initialized successfully")
             except Exception as e:
                 print(f"Failed to initialize agent systems: {e}")
@@ -970,6 +988,15 @@ class ChatBotWindow(QMainWindow):
         self.btn_new.setCursor(Qt.PointingHandCursor)
         self.btn_new.clicked.connect(self.new_chat)
         row.addWidget(self.btn_new)
+
+        self.btn_upload = QPushButton("📁")
+        self.btn_upload.setObjectName("settings")
+        self.btn_upload.setCursor(Qt.PointingHandCursor)
+        self.btn_upload.setFixedSize(38, 32)
+        self.btn_upload.setToolTip("Upload files for RAG")
+        if hasattr(self, 'upload_file'):
+            self.btn_upload.clicked.connect(self.upload_file)
+        row.addWidget(self.btn_upload)
 
         self.btn_settings = QPushButton("⚙")
         self.btn_settings.setObjectName("settings")
@@ -1440,6 +1467,24 @@ class ChatBotWindow(QMainWindow):
     def _use_suggestion(self, text: str) -> None:
         self.input_field.set_text(text)
         self.send_message()
+    
+    def upload_file(self) -> None:
+        if not self.rag:
+            QMessageBox.information(self, "RAG Not Available", "RAG system not initialized. Install dependencies.")
+            return
+        filepath, _ = QFileDialog.getOpenFileName(
+            self, "Upload File for RAG", "", 
+            "Documents (*.txt *.pdf *.docx *.md);;All Files (*)"
+        )
+        if filepath:
+            try:
+                result = self.rag.add_document(filepath)
+                if result.get('success'):
+                    QMessageBox.information(self, "Success", f"Uploaded {result.get('chunks')} chunks from document")
+                else:
+                    QMessageBox.warning(self, "Error", result.get('error', 'Failed'))
+            except Exception as e:
+                QMessageBox.warning(self, "Error", str(e))
 
     @Slot()
     def send_message(self) -> None:
@@ -1485,6 +1530,15 @@ class ChatBotWindow(QMainWindow):
                     messages.append({"role": "system", "content": f"Relevant context from memory:\n{memory_context}"})
             except Exception as e:
                 print(f"Memory context error: {e}")
+        
+        # Add RAG context if available
+        if self.rag and self.agent_mode:
+            try:
+                rag_context = self.rag.get_context(text)
+                if rag_context:
+                    messages.append({"role": "system", "content": rag_context})
+            except Exception as e:
+                print(f"RAG context error: {e}")
         
         messages += self._trimmed_history()
         self.worker = ChatWorker(
