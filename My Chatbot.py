@@ -26,6 +26,9 @@ from PySide6.QtGui import (
     QKeySequence,
     QShortcut,
     QTextDocument,
+    QPixmap,
+    QPainter,
+    QLinearGradient,
 )
 from PySide6.QtWidgets import (
     QApplication,
@@ -58,6 +61,7 @@ from PySide6.QtWidgets import (
     QListWidget,
     QSplitter,
     QStatusBar,
+    QSplashScreen,
 )
 
 # Agent and Memory imports
@@ -1749,12 +1753,38 @@ def main() -> int:
     app = QApplication(sys.argv)
     install_fonts()
 
+    # Create splash screen
+    splash_pixmap = QPixmap(400, 300)
+    splash_pixmap.fill(Qt.transparent)
+    painter = QPainter(splash_pixmap)
+    gradient = QLinearGradient(0, 0, 0, 300)
+    gradient.setColorAt(0, Qt.darkBlue)
+    gradient.setColorAt(1, Qt.black)
+    painter.fillRect(0, 0, 400, 300, gradient)
+    painter.setPen(Qt.white)
+    font = QFont("Segoe UI", 24, QFont.Bold)
+    painter.setFont(font)
+    painter.drawText(0, 120, 400, 50, Qt.AlignCenter, "GroqChatbot")
+    font2 = QFont("Segoe UI", 12)
+    painter.setFont(font2)
+    painter.drawText(0, 150, 400, 30, Qt.AlignCenter, "AI Agent with Memory & Tools")
+    painter.drawText(0, 250, 400, 30, Qt.AlignCenter, "Loading...")
+    painter.end()
+    
+    splash = QSplashScreen(splash_pixmap)
+    splash.show()
+    app.processEvents()
+
     font = QFont()
     font.setFamilies(["Segoe UI", "Nirmala UI", "Noto Sans Bengali", "Segoe UI Emoji"])
     font.setPointSize(10)
     app.setFont(font)
+    
+    splash.showMessage("Initializing...", Qt.AlignBottom | Qt.AlignCenter, Qt.white)
+    app.processEvents()
 
     window = ChatBotWindow()
+    splash.finish(window)
     window.show()
     return app.exec()
 
