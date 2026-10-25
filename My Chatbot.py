@@ -998,6 +998,15 @@ class ChatBotWindow(QMainWindow):
             self.btn_upload.clicked.connect(self.upload_file)
         row.addWidget(self.btn_upload)
 
+        self.btn_clear = QPushButton("🗑")
+        self.btn_clear.setObjectName("settings")
+        self.btn_clear.setCursor(Qt.PointingHandCursor)
+        self.btn_clear.setFixedSize(38, 32)
+        self.btn_clear.setToolTip("Clear all memories")
+        if hasattr(self, 'clear_memories'):
+            self.btn_clear.clicked.connect(self.clear_memories)
+        row.addWidget(self.btn_clear)
+
         self.btn_settings = QPushButton("⚙")
         self.btn_settings.setObjectName("settings")
         self.btn_settings.setCursor(Qt.PointingHandCursor)
@@ -1474,15 +1483,38 @@ class ChatBotWindow(QMainWindow):
             return
         filepath, _ = QFileDialog.getOpenFileName(
             self, "Upload File for RAG", "", 
-            "Documents (*.txt *.pdf *.docx *.md);;All Files (*)"
+            "Documents (*.txt *.pdf *.docx *.md *.json);;All Files (*)"
         )
         if filepath:
             try:
                 result = self.rag.add_document(filepath)
                 if result.get('success'):
-                    QMessageBox.information(self, "Success", f"Uploaded {result.get('chunks')} chunks from document")
+                    QMessageBox.information(self, "Success", f"Uploaded {result.get('chunks')} chunks from {filepath.split('/')[-1].split('\\\\')[-1]}")
                 else:
                     QMessageBox.warning(self, "Error", result.get('error', 'Failed'))
+            except Exception as e:
+                QMessageBox.warning(self, "Error", str(e))
+    
+    def clear_memories(self) -> None:
+        if not self.memory:
+            QMessageBox.information(self, "Memory Not Available", "Memory system not initialized.")
+            return
+        reply = QMessageBox.question(
+            self, "Clear Memories", 
+            "This will clear all conversation history and facts. Continue?",
+            QMessageBox.Yes | QMessageBox.No, QMessageBox.No
+        )
+        if reply == QMessageBox.Yes:
+            try:
+                import sqlite3
+                conn = sqlite3.connect(self.memory.db_path)
+                cur = conn.cursor()
+                cur.execute('DELETE FROM conversations')
+                cur.execute('DELETE FROM facts')
+                cur.execute('DELETE FROM memory_map')
+                conn.commit()
+                conn.close()
+                QMessageBox.information(self, "Success", "Memories cleared successfully")
             except Exception as e:
                 QMessageBox.warning(self, "Error", str(e))
 
