@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="docs/banner.png" alt="GroqChatbot - Bilingual AI Agent with Long-Term Memory" width="100%">
+  <img src="docs/banner.png" alt="GroqChatbot - Bilingual AI Agent with Long-Term Memory, RAG & AI Generation" width="100%">
 </p>
 
 <h1 align="center">GroqChatbot</h1>
 
 <p align="center">
-  <b>A lightning-fast, bilingual AI Agent powered by Groq with SQLite + sqlite-vec long-term memory.</b><br>
-  Works on Desktop (PySide6) and Android (Capacitor). Built for speed, privacy, and extensibility.
+  <b>The Ultimate Bilingual AI Agent • Long-Term Memory • RAG • Image Generation • Tools • Cross-Platform</b><br>
+  Powered by Groq's ultra-fast LPU inference with SQLite + sqlite-vec memory system
 </p>
 
 <p align="center">
@@ -14,6 +14,7 @@
   <a href="https://doc.qt.io/qtforpython/"><img alt="PySide6" src="https://img.shields.io/badge/PySide6-6.5%2B-41CD52?style=for-the-badge&logo=qt&logoColor=white"></a>
   <a href="https://capacitorjs.com/"><img alt="Capacitor 6" src="https://img.shields.io/badge/Capacitor-6-119EFF?style=for-the-badge&logo=capacitor&logoColor=white"></a>
   <a href="https://github.com/asg017/sqlite-vec"><img alt="sqlite-vec" src="https://img.shields.io/badge/sqlite--vec-Vector_Memory-FF6B6B?style=for-the-badge"></a>
+  <a href="https://console.groq.com/"><img alt="Groq" src="https://img.shields.io/badge/Powered_by-Groq-000000?style=for-the-badge"></a>
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge"></a>
 </p>
 
