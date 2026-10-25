@@ -29,20 +29,23 @@
 
 - 🤖 **True AI Agent** - Tool calling, reasoning, task planning, and autonomous multi-step execution
 - 🧠 **Long-Term Memory** - SQLite database with sqlite-vec for semantic vector search across all conversations
-- 📚 **RAG System** - Upload documents (PDF, TXT, DOCX) and chat with them using retrieval-augmented generation
-- 🎨 **AI Image Generation** - Create images with Flux, Stable Diffusion models
+- 📚 **RAG System** - Upload documents (PDF, TXT, DOCX, MD, JSON) and chat with them using retrieval-augmented generation
+- 🎨 **AI Image Generation** - Create images with Flux, Flux-Dev, Flux-Schnell, Stable Diffusion XL, SD 1.5
 - 🖼️ **Illustration Generator** - Generate custom illustrations and artwork
-- 🎵 **Music Generation** - Create AI music and soundtracks (coming soon with API keys)
-- 🎬 **Video Generation** - Generate AI videos and animations (coming soon)
+- 🎵 **Music Generation** - Create AI music, beats, and soundtracks with MusicGen, AudioGen
+- 🎬 **Video Generation (Beta)** - Generate AI videos with Hunyuan Video, CogVideo
+- 🌐 **Multi-Provider Support** - HuggingFace, Replicate, Stability AI, Fal.ai, Together AI, OpenRouter
 - 🌐 **Bilingual by Default** - Seamless English & বাংলা support with automatic language detection
 - ⚡ **Lightning Fast** - Powered by Groq's ultra-fast LPU inference with real-time streaming
 - 🛠️ **Built-in Tools** - Web search, calculator, file system access, code execution, weather, datetime, and more
 - 🔐 **Privacy First** - API keys stay on your device. No telemetry, no analytics, no cloud sync
 - 📱 **Cross-Platform** - Beautiful native-like experience on Windows, macOS, Linux, and Android
-- 🎨 **Modern UI** - Clean, minimal interface with dark theme and smooth animations
+- 🎨 **Modern UI** - Clean, minimal interface with dark theme, splash screen, and smooth animations
 - 💾 **Persistent Memory** - Remembers facts about you, past conversations, and context across sessions
 - 🔍 **Semantic Recall** - Vector similarity search finds relevant memories even from weeks ago
 - 📁 **Document Chat** - Upload and query your own documents with RAG
+- 🗑️ **Memory Management** - Clear memories with one click
+- ⚙️ **Enhanced Settings** - More options and better control
 
 ## 🎯 What Makes It Different
 
