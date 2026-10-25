@@ -13,9 +13,21 @@ from typing import Dict, Any, List, Callable
 import math
 import random
 import requests
-from duckduckgo_search import DDGS
-import pytz
-from dateparser import parse
+try:
+    from duckduckgo_search import DDGS
+    DDGS_AVAILABLE = True
+except ImportError:
+    DDGS_AVAILABLE = False
+try:
+    import pytz
+    PYTZ_AVAILABLE = True
+except ImportError:
+    PYTZ_AVAILABLE = False
+try:
+    from dateparser import parse
+    DATEPARSER_AVAILABLE = True
+except ImportError:
+    DATEPARSER_AVAILABLE = False
 
 class ToolRegistry:
     def __init__(self):
@@ -94,14 +106,16 @@ class ToolRegistry:
         )
     
     def web_search(self, query: str, max_results: int = 5) -> Dict[str, Any]:
+        if not DDGS_AVAILABLE:
+            return {"success": False, "error": "duckduckgo-search not installed. Install with: pip install duckduckgo-search"}
         try:
             with DDGS() as ddgs:
                 results = []
                 for r in ddgs.text(query, max_results=max_results):
                     results.append({
-                        'title': r['title'],
-                        'href': r['href'],
-                        'body': r['body']
+                        'title': r.get('title', ''),
+                        'href': r.get('href', ''),
+                        'body': r.get('body', '')
                     })
                 return {"success": True, "results": results}
         except Exception as e:
@@ -118,6 +132,14 @@ class ToolRegistry:
             return {"success": False, "error": str(e)}
     
     def get_current_time(self, timezone: str = "UTC") -> Dict[str, Any]:
+        if not PYTZ_AVAILABLE:
+            now = datetime.now()
+            return {
+                "success": True,
+                "datetime": now.strftime("%Y-%m-%d %H:%M:%S UTC"),
+                "timestamp": now.timestamp(),
+                "timezone": "UTC (pytz not installed)"
+            }
         try:
             tz = pytz.timezone(timezone)
             now = datetime.now(tz)
