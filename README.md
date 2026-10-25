@@ -109,15 +109,27 @@ graph LR
 
 ## 🎨 AI Generation Capabilities
 
-| Feature | Status | Models | Description |
-|---------|--------|---------|-------------|
-| 🖼️ **Image Generation** | ✅ Available | Flux, Stable Diffusion XL, SD 1.5 | Create stunning images from text prompts |
-| 🎨 **Illustrations** | ✅ Available | Flux | Generate custom illustrations and artwork |
-| 🎵 **Music Generation** | ✅ Available | MusicGen, AudioGen | Create AI music, beats, and soundtracks |
-| 🎬 **Video Generation** | ⚠️ Beta | Hunyuan Video, CogVideo | Generate AI videos from text prompts |
-| 🎞️ **Animations** | 🔄 Coming Soon | AnimateDiff | Create short animations and GIFs |
+| Feature | Status | Models | Providers | Description |
+|---------|--------|---------|-----------|-------------|
+| 🖼️ **Image Generation** | ✅ Available | Flux, Flux-Dev, Flux-Schnell, SDXL, SD 1.5 | HuggingFace, Replicate, Stability AI | Create stunning images from text prompts |
+| 🎨 **Illustrations** | ✅ Available | Flux, Flux-Dev | HuggingFace | Generate custom illustrations and artwork |
+| 🎵 **Music Generation** | ✅ Available | MusicGen, MusicGen-Medium, MusicGen-Large, AudioGen | HuggingFace | Create AI music, beats, and soundtracks |
+| 🎬 **Video Generation** | ⚠️ Beta | Hunyuan Video, CogVideo | HuggingFace | Generate AI videos from text prompts |
+| 🎞️ **Animations** | 🔄 Coming Soon | AnimateDiff | HuggingFace, Replicate | Create short animations and GIFs |
 
-> **Note:** Music and Video generation require additional API keys. Image generation works with HuggingFace API (free tier available).
+**Quick Start for Generation:**
+```bash
+# Add your HuggingFace API key (free)
+echo "HUGGINGFACE_API_KEY=hf_xxx" >> .env
+```
+
+Get free API keys:
+- [HuggingFace](https://huggingface.co/settings/tokens) - Free tier available for most models
+- [Replicate](https://replicate.com/account/api-tokens) - Pay per use, generous free credits
+- [Stability AI](https://platform.stability.ai/account/keys) - Free credits available
+- [Fal.ai](https://fal.ai/dashboard/keys) - Fast inference, free credits
+- [Together AI](https://api.together.xyz/settings/api-keys) - Multiple models available
+
 
 
 ## 🔄 Agent Workflow
