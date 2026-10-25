@@ -1,0 +1,83 @@
+# ---------------------------------------------------------------------------
+# Secrets — never commit
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*Api Key*.md
+keystore.properties
+*.jks
+*.keystore
+*.p12
+*.pfx
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------------------------------------------------------------------------
+# Agent Memory & Data
+# ---------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+memory.db
+test_memory.db
+chroma/
+vector_store/
+embeddings/
+
+# ---------------------------------------------------------------------------
+# Node / Capacitor
+# ---------------------------------------------------------------------------
+node_modules/
+android-app/node_modules/
+npm-debug.log*
+yarn-error.log*
+android-app/android/.gradle/
+android-app/android/build/
+android-app/android/app/build/
+android-app/android/**/build/
+android-app/android/local.properties
+android-app/android/capacitor-cordova-android-plugins/
+android-app/android/app/src/main/assets/public/
+android-app/android/app/src/main/assets/capacitor.config.json
+android-app/android/app/src/main/assets/capacitor.plugins.json
+
+# Gradle
+.gradle/
+
+# Debug APKs are local test builds. The signed release APK *is* committed
+# on purpose so the repo has a one-click download.
+GroqChat-*-debug.apk
+*.apk.bak
+
+# ---------------------------------------------------------------------------
+# Local scratch material — not part of the public app
+# ---------------------------------------------------------------------------
+dataset.csv
+My ChatBot.md
+export_test.md
+*.tmp
+
+# ---------------------------------------------------------------------------
+# Editors & OS
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

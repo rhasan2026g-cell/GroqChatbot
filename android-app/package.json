@@ -1,0 +1,30 @@
+{
+  "name": "groq-chat-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bilingual (English / বাংলা) Groq chat client for Android, built with Capacitor.",
+  "license": "MIT",
+  "author": "RBK",
+  "type": "commonjs",
+  "keywords": [
+    "groq",
+    "groq-api",
+    "chatbot",
+    "bilingual",
+    "bengali",
+    "bangla",
+    "android",
+    "capacitor",
+    "llm",
+    "ai-chat"
+  ],
+  "scripts": {
+    "sync": "cap sync android",
+    "open": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <meta name="theme-color" content="#0f131a" />
+  <title>Groq Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand">
+      <span class="logo">G</span>
+      <div class="brandText">
+        <h1 id="appTitle">Groq Chat</h1>
+        <p id="tagline">Fast, friendly AI chat</p>
+      </div>
+    </div>
+    <div class="actions">
+      <select id="model" aria-label="Model"></select>
+      <button id="langBtn" class="ghost pill" aria-label="Language">বাংলা</button>
+      <button id="newBtn" class="ghost icon" aria-label="New chat">＋</button>
+      <button id="keyBtn" class="ghost icon" aria-label="Settings">⚙</button>
+    </div>
+  </header>
+
+  <main id="chat">
+    <section id="welcome">
+      <h2 id="welcomeTitle"></h2>
+      <p id="welcomeSub"></p>
+      <div id="chips"></div>
+    </section>
+  </main>
+
+  <footer id="composer">
+    <textarea id="input" rows="1" placeholder=""></textarea>
+    <button id="sendBtn" aria-label="Send">↑</button>
+  </footer>
+
+  <div id="modal" class="modal hidden">
+    <div class="card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="cardHead">
+        <h3 id="modalTitle">Connect to Groq</h3>
+        <button id="modalClose" class="x" aria-label="Close">✕</button>
+      </div>
+
+      <p id="modalBody"></p>
+      <p id="keyMeta" class="keyMeta hidden"></p>
+
+      <ol id="keySteps" class="steps">
+        <li id="step1"></li>
+        <li id="step2"></li>
+        <li id="step3"></li>
+      </ol>
+
+      <div class="field">
+        <input id="keyInput" type="password" placeholder="gsk_…" autocomplete="off"
+               autocapitalize="off" autocorrect="off" spellcheck="false" />
+        <button id="revealBtn" class="reveal" type="button">Show</button>
+      </div>
+
+      <p id="keyError" class="keyError hidden" role="alert"></p>
+
+      <div class="modalActions">
+        <a id="keyLink" href="https://console.groq.com/keys" target="_blank" rel="noopener"></a>
+        <div class="spacer"></div>
+        <button id="removeBtn" class="ghost danger hidden">Remove</button>
+        <button id="modalSave">Save &amp; test</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

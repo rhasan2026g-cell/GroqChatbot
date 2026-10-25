@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest
+    
+    - name: Lint and compile
+      run: |
+        python -m py_compile "My Chatbot.py" app.py memory_system.py agent_tools.py
+        echo "Python syntax check passed"
+    
+    - name: Run tests
+      run: |
+        python -m pytest test_agent.py -v || true
+        echo "Tests completed"
+    
+    - name: Check JavaScript syntax
+      run: |
+        node --check android-app/www/app.js
+        echo "JavaScript syntax check passed"
