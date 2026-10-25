@@ -28,6 +28,11 @@
 
 - 🤖 **True AI Agent** - Tool calling, reasoning, task planning, and autonomous multi-step execution
 - 🧠 **Long-Term Memory** - SQLite database with sqlite-vec for semantic vector search across all conversations
+- 📚 **RAG System** - Upload documents (PDF, TXT, DOCX) and chat with them using retrieval-augmented generation
+- 🎨 **AI Image Generation** - Create images with Flux, Stable Diffusion models
+- 🖼️ **Illustration Generator** - Generate custom illustrations and artwork
+- 🎵 **Music Generation** - Create AI music and soundtracks (coming soon with API keys)
+- 🎬 **Video Generation** - Generate AI videos and animations (coming soon)
 - 🌐 **Bilingual by Default** - Seamless English & বাংলা support with automatic language detection
 - ⚡ **Lightning Fast** - Powered by Groq's ultra-fast LPU inference with real-time streaming
 - 🛠️ **Built-in Tools** - Web search, calculator, file system access, code execution, weather, datetime, and more
@@ -36,6 +41,7 @@
 - 🎨 **Modern UI** - Clean, minimal interface with dark theme and smooth animations
 - 💾 **Persistent Memory** - Remembers facts about you, past conversations, and context across sessions
 - 🔍 **Semantic Recall** - Vector similarity search finds relevant memories even from weeks ago
+- 📁 **Document Chat** - Upload and query your own documents with RAG
 
 ## 🎯 What Makes It Different
 
@@ -56,50 +62,62 @@ GroqChatbot isn't just a chat interface—it's an intelligent agent that learns,
   </tr>
 </table>
 
-## 🏗️ Architecture
+## 🧠 Memory & RAG Architecture
 
 ```mermaid
-graph TB
-    subgraph Client["Client Layer"]
-        Desktop["🖥️ Desktop App<br/>PySide6 + Python"]
-        Android["📱 Android App<br/>Capacitor + HTML/JS/CSS"]
+graph LR
+    subgraph Input["Document Input"]
+        PDF["📄 PDF"]
+        TXT["📝 TXT"]
+        DOCX["📃 DOCX"]
+        User["💬 User Query"]
     end
     
-    subgraph AgentCore["Agent Core"]
-        Orchestrator["🎯 Agent Orchestrator<br/>Planning & Reasoning"]
-        Memory["🧠 Memory System<br/>SQLite + sqlite-vec"]
-        Tools["🛠️ Tool Registry<br/>Function Calling"]
-        Context["📚 Context Manager<br/>RAG + History"]
+    subgraph Processing["Processing"]
+        Chunk["✂️ Text Chunking"]
+        Embed["🔢 Embeddings<br/>SentenceTransformers"]
     end
     
-    subgraph MemoryLayer["Memory Layer"]
-        Conversations["💬 Conversations DB"]
-        Vectors["🔢 Vector Store<br/>Embeddings"]
-        Facts["📝 Long-term Facts"]
-        Summaries["📋 Session Summaries"]
+    subgraph Storage["Vector Storage"]
+        SQLite["🗄️ SQLite"]
+        VecDB["🔍 sqlite-vec<br/>Vector Store"]
     end
     
-    subgraph External["External Services"]
-        Groq["⚡ Groq API<br/>LPU Inference"]
-        Web["🌐 Web Search<br/>Optional Tools"]
+    subgraph Retrieval["RAG Retrieval"]
+        Search["🎯 Semantic Search"]
+        Context["📋 Context Building"]
+        Augment["✨ Prompt Augmentation"]
     end
     
-    Desktop --> Orchestrator
-    Android --> Orchestrator
-    Orchestrator --> Memory
-    Orchestrator --> Tools
-    Orchestrator --> Context
-    Memory --> Conversations
-    Memory --> Vectors
-    Memory --> Facts
-    Memory --> Summaries
-    Orchestrator --> Groq
-    Tools --> Web
+    PDF --> Chunk
+    TXT --> Chunk
+    DOCX --> Chunk
+    Chunk --> Embed
+    Embed --> VecDB
+    SQLite --> VecDB
     
-    style AgentCore fill:#4c8dff22,stroke:#4c8dff
-    style MemoryLayer fill:#4ade8022,stroke:#4ade80
-    style Groq fill:#ff6b6b22,stroke:#ff6b6b
+    User --> Search
+    VecDB --> Search
+    Search --> Context
+    Context --> Augment
+    Augment --> LLM["⚡ Groq LLM"]
+    
+    style VecDB fill:#4ade8022,stroke:#4ade80
+    style LLM fill:#ff6b6b22,stroke:#ff6b6b
 ```
+
+## 🎨 AI Generation Capabilities
+
+| Feature | Status | Models | Description |
+|---------|--------|---------|-------------|
+| 🖼️ **Image Generation** | ✅ Available | Flux, Stable Diffusion XL, SD 1.5 | Create stunning images from text prompts |
+| 🎨 **Illustrations** | ✅ Available | Flux | Generate custom illustrations and artwork |
+| 🎵 **Music Generation** | 🔄 Coming Soon | MusicGen, AudioGen | Create AI music, beats, and soundtracks |
+| 🎬 **Video Generation** | 🔄 Coming Soon | Hunyuan Video, Kling, Pika | Generate AI videos from text prompts |
+| 🎞️ **Animations** | 🔄 Coming Soon | AnimateDiff | Create short animations and GIFs |
+
+> **Note:** Music and Video generation require additional API keys. Image generation works with HuggingFace API (free tier available).
+
 
 ## 🔄 Agent Workflow
 
