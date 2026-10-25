@@ -113,8 +113,8 @@ graph LR
 |---------|--------|---------|-------------|
 | 🖼️ **Image Generation** | ✅ Available | Flux, Stable Diffusion XL, SD 1.5 | Create stunning images from text prompts |
 | 🎨 **Illustrations** | ✅ Available | Flux | Generate custom illustrations and artwork |
-| 🎵 **Music Generation** | 🔄 Coming Soon | MusicGen, AudioGen | Create AI music, beats, and soundtracks |
-| 🎬 **Video Generation** | 🔄 Coming Soon | Hunyuan Video, Kling, Pika | Generate AI videos from text prompts |
+| 🎵 **Music Generation** | ✅ Available | MusicGen, AudioGen | Create AI music, beats, and soundtracks |
+| 🎬 **Video Generation** | ⚠️ Beta | Hunyuan Video, CogVideo | Generate AI videos from text prompts |
 | 🎞️ **Animations** | 🔄 Coming Soon | AnimateDiff | Create short animations and GIFs |
 
 > **Note:** Music and Video generation require additional API keys. Image generation works with HuggingFace API (free tier available).
