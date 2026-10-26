@@ -55,4 +55,4 @@ See [CHANGELOG.md](CHANGELOG.md) for complete details.
 
 Thanks to Groq, HuggingFace, and the open-source community!
 
-**Full Changelog**: https://github.com/rhasan2026g-cell/GroqChatbot/commits/v1.0.0
+**Full Changelog**: https://github.com/rhasan2026g-cell/GroqChatbot/commit/4c3ac3d72f663e06f4b614594bd5e5be5774491a

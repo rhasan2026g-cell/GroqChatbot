@@ -106,4 +106,4 @@ First public release.
 - `.env`, keystore files and local build outputs are gitignored.
 
 [1.1.0]: https://github.com/rhasan2026g-cell/GroqChatbot/releases/tag/v1.1.0
-[1.0.0]: https://github.com/rhasan2026g-cell/GroqChatbot/releases/tag/v1.0.0
+[1.0.0]: https://github.com/rhasan2026g-cell/GroqChatbot/commit/4c3ac3d72f663e06f4b614594bd5e5be5774491a
