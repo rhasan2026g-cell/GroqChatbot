@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="docs/banner.png" alt="GroqChatbot — bilingual AI agent with memory, RAG, tools and a creation studio" width="100%">
+  <img src="docs/banner.png" alt="GroqChatbot — free open-source bilingual AI chatbot for Windows and Android with memory, document Q&A, agent tools and a creation studio" width="100%">
 </p>
 
 <h1 align="center">GroqChatbot</h1>
 
 <p align="center">
-  <b>A bilingual AI agent for your desktop and phone — memory, documents, tools,<br>
-  and a creation studio, all running on Groq's LPU inference.</b>
+  <b>The free, open-source, ChatGPT-style AI agent for Windows &amp; Android — bilingual<br>
+  English ⇄ বাংলা chat with long-term memory, document Q&amp;A, ten tools and a studio.</b>
 </p>
 
 <p align="center">
@@ -32,13 +32,34 @@
 
 ---
 
-**GroqChatbot** is a local-first chat app that actually remembers. It runs as a
-polished PySide6 desktop application on Windows, and as a signed 3.5 MB Capacitor
-APK on Android. Conversations, facts, documents and generated media stay on your
-machine — the only thing sent to Groq is the prompt you type.
+**GroqChatbot** is a free, open-source AI chatbot and desktop agent for Windows and
+Android. It streams answers from open models on Groq's LPU inference, remembers you
+in a local SQLite database, answers questions about your own PDFs and Office files
+with RAG, and can search the web, run Python, read and write files, or generate
+images, music and video — with no account, no subscription and no telemetry.
 
-Write in English, get English. Write in বাংলা, get natural Bengali. Every label,
-tooltip and suggestion chip in the UI switches between the two languages instantly.
+Talk to it in English, get English. Talk to it in বাংলা (Bengali), get natural
+Bengali: every label, tooltip, tool result and reply follows the language you pick,
+so it doubles as a Bengali AI assistant. Your keys live in a local `.env` file, your
+conversations live in `memory.db`, and the only thing that leaves your machine is
+the prompt you type.
+
+> Not affiliated with OpenAI or Groq. "ChatGPT-style" simply means an independent
+> chat interface over modern open models, using your own API key.
+
+## ⚡ At a glance
+
+| Feature | Detail |
+| --- | --- |
+| **Price** | Free and open source (MIT). Groq's free tier covers normal use. |
+| **Platforms** | Windows 10/11 desktop app (86.5 MB EXE) · Android 5.1+ (3.5 MB APK) |
+| **Models** | `openai/gpt-oss-20b` (default), `openai/gpt-oss-120b`, `qwen/qwen3.8-27b` |
+| **Memory** | SQLite + optional `sqlite-vec` semantic recall; FTS5 keyword fallback |
+| **Documents** | PDF, DOCX, XLSX plus 35 text/source formats, up to 30 MB each |
+| **Languages** | English and বাংলা (Bengali) — full interface and replies |
+| **Tools** | 10 agent tools, each with its own permission switch |
+| **Media** | Images, illustrations, music and video across 5 providers |
+| **Privacy** | Local-first: no backend, no account, no analytics, no update pings |
 
 ## ✨ What's new in 1.1
 
@@ -63,54 +84,54 @@ tooltip and suggestion chip in the UI switches between the two languages instant
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/desktop-dark.png" alt="GroqChatbot desktop, dark theme" width="860">
+  <img src="docs/screenshots/desktop-dark.png" alt="GroqChatbot desktop AI chat app in dark theme, streaming an answer with memory context and the dashboard sidebar" width="860">
 </p>
 <p align="center"><i>Desktop — streaming chat, memory context and the live dashboard</i></p>
 
 <p align="center">
-  <img src="docs/screenshots/desktop-light.png" alt="GroqChatbot desktop, light theme" width="860">
+  <img src="docs/screenshots/desktop-light.png" alt="GroqChatbot desktop AI chat app in light theme" width="860">
 </p>
 <p align="center"><i>The same workspace in the light theme</i></p>
 
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-database-light.png" alt="Database browser" width="420"><br><b>Database browser</b><br><sub>Every conversation, fact and chunk</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-tools-dark.png" alt="Tool workbench" width="380"><br><b>Tool workbench</b><br><sub>Run tools by hand</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-database-light.png" alt="Database browser showing conversations, facts, the vector index and RAG chunks" width="420"><br><b>Database browser</b><br><sub>Every conversation, fact and chunk</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-tools-dark.png" alt="AI agent tool workbench with JSON schemas and permission switches" width="380"><br><b>Tool workbench</b><br><sub>Run tools by hand</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-studio-light.png" alt="Creation studio" width="420"><br><b>Creation studio</b><br><sub>Images, music and video</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-settings-dark.png" alt="Settings and system" width="340"><br><b>Settings &amp; system</b><br><sub>Models, keys, memory, theme</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-studio-light.png" alt="AI image, music and video generation studio" width="420"><br><b>Creation studio</b><br><sub>Images, music and video</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-settings-dark.png" alt="Settings dialog for models, API keys, memory and theme" width="340"><br><b>Settings &amp; system</b><br><sub>Models, keys, memory, theme</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-key-dark.png" alt="Guided API key setup" width="300"><br><b>Guided key setup</b><br><sub>Three steps, validated and tested</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-about-dark.png" alt="About dialog" width="280"><br><b>About</b><br><sub>Version, links, credits</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-key-dark.png" alt="Guided Groq API key setup with validation and a live test" width="300"><br><b>Guided key setup</b><br><sub>Three steps, validated and tested</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-about-dark.png" alt="About dialog with version, links and credits" width="280"><br><b>About</b><br><sub>Version, links, credits</sub></td>
   </tr>
 </table>
 
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/screenshots/android-dark.png" alt="Android dark theme" width="210"><br><b>Android — dark</b></td>
-    <td align="center"><img src="docs/screenshots/android-light.png" alt="Android light theme" width="210"><br><b>Android — light</b></td>
-    <td align="center"><img src="docs/screenshots/android-bengali.png" alt="Android in Bengali" width="210"><br><b>Android — বাংলা</b></td>
-    <td align="center"><img src="docs/screenshots/android-drawer.png" alt="Android dashboard drawer" width="210"><br><b>Dashboard drawer</b></td>
+    <td align="center"><img src="docs/screenshots/android-dark.png" alt="GroqChatbot Android AI chat app, dark theme" width="210"><br><b>Android — dark</b></td>
+    <td align="center"><img src="docs/screenshots/android-light.png" alt="GroqChatbot Android AI chat app, light theme" width="210"><br><b>Android — light</b></td>
+    <td align="center"><img src="docs/screenshots/android-bengali.png" alt="GroqChatbot Android app with a Bengali (বাংলা) interface" width="210"><br><b>Android — বাংলা</b></td>
+    <td align="center"><img src="docs/screenshots/android-drawer.png" alt="Android dashboard drawer with usage stats" width="210"><br><b>Dashboard drawer</b></td>
   </tr>
   <tr>
     <td align="center"><img src="docs/screenshots/android-splash.png" alt="Android splash screen" width="210"><br><b>Splash screen</b></td>
-    <td align="center"><img src="docs/screenshots/android-welcome.png" alt="Android welcome screen" width="210"><br><b>Welcome</b></td>
-    <td align="center"><img src="docs/screenshots/android-settings-light.png" alt="Android settings sheet" width="210"><br><b>Settings sheet</b></td>
+    <td align="center"><img src="docs/screenshots/android-welcome.png" alt="Android welcome screen with connect-key action" width="210"><br><b>Welcome</b></td>
+    <td align="center"><img src="docs/screenshots/android-settings-light.png" alt="Android settings sheet for key, model and theme" width="210"><br><b>Settings sheet</b></td>
   </tr>
 </table>
 
 ## 🎯 What it can do
 
-### 💬 Chat that feels instant
+### 💬 A fast AI chat app that streams
 Replies stream token by token, with a stop button that keeps the partial answer,
 regenerate, copy per message and one-click Markdown export. Markdown is rendered
 properly: headings, lists, quotes, tables, links and fenced code with syntax
 colours. Arithmetic is normalised to Unicode symbols so `\frac{1}{2}` never leaks
 into the chat.
 
-### 🧠 Memory that survives restarts
+### 🧠 Long-term memory that survives restarts
 Every message is written to SQLite. When you mention your name, city, work or a
 preference, the app extracts that fact with pattern matching and stores it. On the
 next question the most relevant memories are pulled back into the prompt — so you
@@ -134,7 +155,7 @@ PDF extraction needs `pypdf` and spreadsheets need `openpyxl`; if a reader is
 missing the app tells you the exact `pip install` command instead of failing
 silently.
 
-### 🛠️ Ten agent tools
+### 🛠️ Ten AI agent tools (function calling)
 The model decides when a tool is needed, calls it, and synthesises the result.
 
 | Tool | What it does |
@@ -150,7 +171,7 @@ The model decides when a tool is needed, calls it, and synthesises the result.
 | `get_weather` | Current conditions for a city |
 | `random_number` | Random integer in an inclusive range |
 
-### 🎨 Creation studio
+### 🎨 AI image, music and video generation
 Generate images, illustrations, music and video from a prompt, with a negative
 prompt, aspect size and a gallery. Providers are auto-detected from your `.env`:
 
@@ -176,10 +197,25 @@ The sidebar shows messages, facts, documents and tokens, a 7-day activity chart,
 quick actions for the database/tools/studio/upload, and live badges for memory
 mode, search mode, provider count and the exact data folder in use.
 
-### 🌗 Two languages, two themes, five accents
+### 🌗 English ⇄ বাংলা, two themes, five accents
 English ⇄ বাংলা covers every string, including the system prompt instruction that
 makes replies follow your language. Dark and light palettes are hand-tuned (not
 inverted), with blue, violet, emerald, amber and rose accents.
+
+## 👥 Who it is for
+
+- **Bengali speakers** who are tired of translating the interface, the tool labels
+  and the error messages — this app is genuinely bilingual, not English with a
+  language toggle.
+- **Students and researchers** who want to ask questions across lecture PDFs,
+  spreadsheets and notes instead of scrolling through them.
+- **Developers** who would rather read and fork the whole stack: Python + PySide6 on
+  the desktop, plain HTML/CSS/JS in the Android WebView, no framework magic.
+- **Privacy-minded users** who prefer conversations on their own disk over a vendor
+  account, and who want the option to turn tools off.
+- **Creators** who want prompt-to-image, music and video in the same window as the
+  chat.
+- **Windows and Android users** who want one familiar app on both, not a browser tab.
 
 ## 🏗️ Architecture
 
@@ -438,10 +474,31 @@ Found a problem? Open an issue or read [SECURITY.md](SECURITY.md).
 
 ## ❓ FAQ
 
+**Is there a free ChatGPT alternative for Windows?**
+If you mean a free chat app with modern models, no subscription and a local
+history, yes — GroqChatbot is MIT-licensed and costs nothing to run. It is not a
+clone of ChatGPT or a wrapper around OpenAI: it talks to open models served by
+Groq, with your own free key.
+
+**Is there an AI chatbot that actually speaks Bengali (বাংলা)?**
+Yes. The whole interface — buttons, tool names, errors, settings — switches to
+Bengali, and the system prompt tells the model to answer in whichever language you
+write in, so you get natural বাংলা instead of translated English.
+
 **Do I need a paid Groq account?**
 No. A free key from [console.groq.com/keys](https://console.groq.com/keys) is
 enough for normal use. Generation providers (images, music, video) are separate
 and optional.
+
+**Can it run fully offline?**
+No. Chat inference happens on Groq's servers, so an internet connection is
+required. What stays offline is everything that matters for privacy: memory,
+documents, settings, keys and generated media never leave your machine.
+
+**What files can I upload?**
+PDF, Word (`.docx`) and Excel (`.xlsx`), plus 35 text and source formats — Markdown,
+CSV, JSON, YAML, HTML, SQL, Python, JavaScript, Java, C/C++, Go, Rust and more.
+Each file can be up to 30 MB.
 
 **Where is my data stored?**
 Running from source: `data/` next to the script. Packaged EXE:
@@ -491,16 +548,40 @@ MIT — see [LICENSE](LICENSE).
 [sentence-transformers](https://www.sbert.net/) · [Capacitor](https://capacitorjs.com/) ·
 [Pillow](https://python-pillow.org/)
 
-## 🔎 Topics
+## 🏷️ Topics &amp; search terms
 
-`ai-agent` · `groq` · `chatbot` · `bilingual` · `bengali` · `pyside6` ·
-`desktop-app` · `android` · `capacitor` · `python` · `llm` · `rag` ·
-`long-term-memory` · `sqlite-vec` · `tool-calling` · `image-generation` ·
-`music-generation` · `local-first` · `privacy` · `streaming`
+Twenty GitHub topics, so the repository surfaces in the right searches — follow
+any of them to find similar projects:
 
-The same twenty are set as repository topics, so the repo is discoverable on
-GitHub search. Bengali keywords live in the repository description instead, since
-topics are limited to twenty.
+[`ai`](https://github.com/topics/ai) ·
+[`llm`](https://github.com/topics/llm) ·
+[`rag`](https://github.com/topics/rag) ·
+[`ai-agent`](https://github.com/topics/ai-agent) ·
+[`ai-assistant`](https://github.com/topics/ai-assistant) ·
+[`chatbot`](https://github.com/topics/chatbot) ·
+[`generative-ai`](https://github.com/topics/generative-ai) ·
+[`android`](https://github.com/topics/android) ·
+[`desktop-app`](https://github.com/topics/desktop-app) ·
+[`windows`](https://github.com/topics/windows) ·
+[`open-source`](https://github.com/topics/open-source) ·
+[`local-first`](https://github.com/topics/local-first) ·
+[`privacy`](https://github.com/topics/privacy) ·
+[`groq`](https://github.com/topics/groq) ·
+[`pyside6`](https://github.com/topics/pyside6) ·
+[`capacitor`](https://github.com/topics/capacitor) ·
+[`bilingual`](https://github.com/topics/bilingual) ·
+[`bengali`](https://github.com/topics/bengali) ·
+[`image-generation`](https://github.com/topics/image-generation) ·
+[`tool-calling`](https://github.com/topics/tool-calling)
+
+Searches this project is built to answer: free ChatGPT alternative for Windows ·
+Bengali (বাংলা) AI chatbot · desktop AI agent with long-term memory · chat with
+PDF, DOCX and XLSX · Groq LPU desktop app · local-first private AI assistant ·
+PySide6 chat app · RAG without a backend · AI image, music and video generator ·
+open-source Android AI chat client.
+
+Why these and not others — with the demand data — is documented in
+[SEO.md](SEO.md).
 
 ---
 

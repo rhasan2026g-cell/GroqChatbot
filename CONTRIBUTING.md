@@ -59,6 +59,7 @@ Node 18+ and, to build an APK, JDK 17 plus Android SDK 34 — see
 | `app_paths.py` | Dev vs frozen data directories |
 | `android-app/www/` | The entire Android UI |
 | `docs/` | Banner, social preview, screenshots |
+| `SEO.md` | Keyword map, topic choices and discovery rules |
 
 ## House rules
 
@@ -73,6 +74,11 @@ Node 18+ and, to build an APK, JDK 17 plus Android SDK 34 — see
 - **Keep it local-first.** No telemetry, no hidden network calls, no accounts.
 - **Match the existing style.** PySide6 widgets are built in code with the shared
   stylesheet; don't inline colours that belong in `ui_theme.py`.
+- **Treat metadata as part of the product.** The About description, the twenty
+  topics and the README headings are what make the project findable. If you change
+  what the app does, update all three — the rules and the data behind them are in
+  [SEO.md](SEO.md). No fake stars, no keyword stuffing, no claims the code cannot
+  back up.
 - **One concern per PR.** Unrelated refactors make review slow.
 
 ## Checks before opening a PR

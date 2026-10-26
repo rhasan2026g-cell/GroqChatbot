@@ -4,6 +4,26 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Documentation
+
+- **Search and discovery pass.** Repository description rewritten around the
+  phrases people actually search for (free, open-source, ChatGPT-style, Windows,
+  Android, Bengali/বাংলা), and the twenty topics re-chosen from measured GitHub
+  demand — broad ones (`ai`, `llm`, `android`, `windows`, `open-source`) for
+  classification, tight ones (`groq`, `pyside6`, `rag`, `tool-calling`) for stack
+  searches, and `bengali` / `bilingual` where a young repo can actually rank.
+- Added [SEO.md](SEO.md): the keyword map, the demand data behind each topic, the
+  rules (no fake stars, no stuffing, no competitor claims) and a monthly
+  measurement routine.
+- README front-loads the search phrases in the first two paragraphs, gains an
+  "At a glance" fact table, keyword-rich section headings, descriptive alt text on
+  every screenshot, and FAQ questions phrased the way people type them
+  ("Is there a free ChatGPT alternative for Windows?", "Is there an AI chatbot
+  that speaks Bengali?").
+- Discussions enabled so questions do not pile up in issue threads.
+
 ## [1.1.0] — 2026-10-26
 
 A full interface release: the desktop app gains a dashboard, real system

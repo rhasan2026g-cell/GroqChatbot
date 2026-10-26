@@ -6,43 +6,27 @@ which GitHub only exposes in the web UI.
 
 ## About panel
 
-**Description** (currently live):
+**Description** (currently live, 269 / 350 characters):
 
 ```
-Bilingual (English/বাংলা) AI agent for Windows and Android. Groq LPU streaming, long-term SQLite memory, document Q&A, ten tools, and an image/music/video studio. Built with PySide6 + Capacitor.
+Free, open-source ChatGPT-style AI app for Windows and Android. Bilingual English/Bengali (বাংলা) chat with Groq LPU streaming, offline SQLite long-term memory, RAG document Q&A, 10 agent tools and an image/music/video studio. No account, no telemetry, keys stay local.
 ```
 
 **Website:** `https://github.com/rhasan2026g-cell/GroqChatbot`
 
 **Topics** (20 — GitHub's maximum, currently live):
+`ai`, `llm`, `rag`, `ai-agent`, `ai-assistant`, `chatbot`, `generative-ai`,
+`android`, `desktop-app`, `windows`, `open-source`, `local-first`, `privacy`,
+`groq`, `pyside6`, `capacitor`, `bilingual`, `bengali`, `image-generation`,
+`tool-calling`.
 
-```
-ai-agent
-groq
-chatbot
-bilingual
-bengali
-pyside6
-desktop-app
-android
-capacitor
-python
-llm
-rag
-long-term-memory
-sqlite-vec
-tool-calling
-image-generation
-music-generation
-local-first
-privacy
-streaming
-```
+These were chosen from measured GitHub demand rather than intuition; the data, the
+keyword map and the rules are in [SEO.md](SEO.md). Short version: broad topics
+(`ai`, `llm`) classify the project, mid-size ones (`groq`, `pyside6`, `rag`) match
+how people browse stacks, and `bengali` / `bilingual` are near-empty pools where a
+young repository can actually reach page one.
 
-The README body also carries phrasing that is not a topic but helps search
-engines and GitHub code search: “retrieval-augmented generation”, “function
-calling”, “vector search”, “semantic memory”, the model names (FLUX, GPT-OSS,
-Qwen, MusicGen, Hunyuan) and বাংলা.
+**Discussions:** enabled, so questions have a home that is not an issue thread.
 
 ## Social preview
 
@@ -56,7 +40,7 @@ GitHub has no API for this one — set it manually:
 | Field | Value |
 | --- | --- |
 | Tag | `v1.1.0` |
-| Title | GroqChatbot 1.1.0 — dashboard, database browser, tool bench, new Android UI |
+| Title | GroqChatbot 1.1.0 — free bilingual AI app for Windows & Android (Groq, RAG, memory, studio) |
 | URL | <https://github.com/rhasan2026g-cell/GroqChatbot/releases/tag/v1.1.0> |
 | Marked as | Latest |
 | Body | `RELEASE_NOTES_v1.1.0.md` |
@@ -80,12 +64,12 @@ $headers = @{ Authorization = "Bearer $env:GITHUB_TOKEN"; "User-Agent" = "GroqCh
 
 Invoke-RestMethod -Method Patch -Uri "https://api.github.com/repos/rhasan2026g-cell/GroqChatbot" `
   -Headers $headers -ContentType "application/json" `
-  -Body (@{ description = "Bilingual (English/বাংলা) AI agent for Windows and Android." } | ConvertTo-Json)
+  -Body (@{ description = "Free, open-source ChatGPT-style AI app for Windows and Android. Bilingual English/Bengali (বাংলা)." } | ConvertTo-Json)
 
 Invoke-RestMethod -Method Put -Uri "https://api.github.com/repos/rhasan2026g-cell/GroqChatbot/topics" `
   -Headers $headers -ContentType "application/json" `
-  -Body (@{ names = @("ai-agent","groq","chatbot") } | ConvertTo-Json)
+  -Body (@{ names = @("ai","llm","rag","bengali") } | ConvertTo-Json)
 ```
 
 `names` must always be the **full** list you want — the endpoint replaces topics,
-it does not merge them. Keep it at 20 or fewer.
+it does not merge them. Keep it at 20 or fewer and keep [SEO.md](SEO.md) in sync.
