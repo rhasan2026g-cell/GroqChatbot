@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Groq Chat</string>
-    <string name="title_activity_main">Groq Chat</string>
+    <string name="app_name">GroqChatbot</string>
+    <string name="title_activity_main">GroqChatbot</string>
     <string name="package_name">com.rbk.groqchat</string>
     <string name="custom_url_scheme">com.rbk.groqchat</string>
 </resources>

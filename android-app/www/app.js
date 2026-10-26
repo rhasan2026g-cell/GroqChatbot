@@ -1,12 +1,16 @@
-/* Groq Chat — mobile client (English / বাংলা) */
+/* GroqChatbot — Android client
+   English / বাংলা · streaming chat · local history · themeable UI */
 
 const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const MODELS_URL = "https://api.groq.com/openai/v1/models";
+const APP_VERSION = "1.1.0";
 
 const SYSTEM_PROMPT =
-  "You are a helpful, friendly assistant inside a mobile chat app. " +
+  "You are GroqChatbot, a helpful and friendly assistant inside a mobile app. " +
   "Always answer in the same language the user writes in: if they write in Bengali (বাংলা), " +
   "answer in natural Bengali; if they write in English, answer in English. Match their script " +
-  "and tone. Keep answers clear and concise, use short paragraphs, and wrap code in triple backticks.";
+  "and tone. Keep answers clear and concise, use short paragraphs, bullet points when useful, " +
+  "and wrap code in triple backticks with a language tag. Be honest when you are unsure.";
 
 const MODELS = [
   { id: "openai/gpt-oss-20b", name: "GPT-OSS 20B", tag: "fast" },
@@ -14,22 +18,26 @@ const MODELS = [
   { id: "qwen/qwen3.8-27b", name: "Qwen 3.8 27B", tag: "fastest" },
 ];
 
+/* -------------------------------------------------------------------------- */
+/* translations                                                               */
+/* -------------------------------------------------------------------------- */
 const STRINGS = {
   en: {
-    appTitle: "Groq Chat",
-    tagline: "Fast, friendly AI chat",
+    appTitle: "GroqChatbot",
+    tagline: "Fast Groq AI · English & বাংলা",
     welcomeTitle: "How can I help you today?",
-    welcomeSub: "Ask anything — in English or বাংলা.",
-    placeholder: "Message Groq Chat…",
+    welcomeSub: "Ask anything — in English or বাংলা. Replies stream in real time.",
+    placeholder: "Message GroqChatbot…",
     send: "Send",
     stop: "Stop",
     stopped: "(stopped)",
     you: "You",
-    assistant: "Assistant",
+    assistant: "GroqChatbot",
     copy: "Copy",
     copied: "Copied",
     newChat: "New chat",
-    thinking: "Thinking",
+    thinking: "Thinking…",
+    streaming: "Streaming…",
     suggestions: [
       "Explain quantum computing",
       "Write a poem in বাংলা",
@@ -38,6 +46,40 @@ const STRINGS = {
     modelFast: "fast",
     modelSmart: "smart",
     modelFastest: "fastest",
+    dashboard: "Dashboard",
+    atAGlance: "At a glance",
+    quickActions: "Quick actions",
+    system: "System",
+    statMessages: "Messages",
+    statModel: "Model",
+    statLang: "Language",
+    statTheme: "Theme",
+    themeDark: "Dark",
+    themeLight: "Light",
+    switchLight: "Switch to light",
+    switchDark: "Switch to dark",
+    english: "English",
+    bengali: "বাংলা",
+    toBengali: "বাংলা",
+    toEnglish: "English",
+    clearHistory: "Clear history",
+    clearAsk: "Delete this conversation from this device?",
+    historyCleared: "Chat cleared.",
+    settingsAction: "API key & models",
+    settingsTitle: "Settings",
+    modelLabel: "Model",
+    modelHint: "The model applies to your next message.",
+    appearance: "Appearance",
+    languageLabel: "Language",
+    privacy:
+      "Your Groq API key is stored only on this phone. Chats are kept locally and " +
+      "sent to Groq only to generate a reply.",
+    aboutLine: `GroqChatbot ${APP_VERSION} · Groq + Capacitor`,
+    sysKeyOn: "Groq key connected",
+    sysKeyOff: "Connect your Groq key",
+    sysHistory: "Local chat history",
+    sysStreaming: "Live streaming replies",
+    menu: "Open dashboard",
     keyTitleNew: "Connect to Groq",
     keyTitleExisting: "Groq connection",
     keyBodyNew:
@@ -71,20 +113,21 @@ const STRINGS = {
     netError: "Network error. Check your connection and try again.",
   },
   bn: {
-    appTitle: "গ্রক চ্যাট",
-    tagline: "দ্রুত ও সহজ এআই চ্যাট",
+    appTitle: "গ্রকচ্যাটবট",
+    tagline: "দ্রুত গ্রক এআই · ইংরেজি ও বাংলা",
     welcomeTitle: "আজ আপনাকে কীভাবে সাহায্য করতে পারি?",
-    welcomeSub: "ইংরেজি বা বাংলায় যেকোনো কিছু জিজ্ঞাসা করুন।",
-    placeholder: "গ্রক চ্যাটকে কিছু লিখুন…",
+    welcomeSub: "ইংরেজি বা বাংলায় যেকোনো কিছু জিজ্ঞাসা করুন। উত্তর সরাসরি আসবে।",
+    placeholder: "গ্রকচ্যাটবটকে কিছু লিখুন…",
     send: "পাঠান",
     stop: "থামান",
     stopped: "(থামানো হয়েছে)",
     you: "আপনি",
-    assistant: "সহকারী",
+    assistant: "গ্রকচ্যাটবট",
     copy: "কপি",
     copied: "কপি হয়েছে",
     newChat: "নতুন চ্যাট",
-    thinking: "ভাবছি",
+    thinking: "ভাবছি…",
+    streaming: "উত্তর আসছে…",
     suggestions: [
       "কোয়ান্টাম কম্পিউটিং কী?",
       "বাংলায় কবিতা লেখো",
@@ -93,6 +136,40 @@ const STRINGS = {
     modelFast: "দ্রুত",
     modelSmart: "স্মার্ট",
     modelFastest: "সবচেয়ে দ্রুত",
+    dashboard: "ড্যাশবোর্ড",
+    atAGlance: "এক নজরে",
+    quickActions: "দ্রুত কাজ",
+    system: "সিস্টেম",
+    statMessages: "বার্তা",
+    statModel: "মডেল",
+    statLang: "ভাষা",
+    statTheme: "থিম",
+    themeDark: "ডার্ক",
+    themeLight: "লাইট",
+    switchLight: "লাইট মোডে যান",
+    switchDark: "ডার্ক মোডে যান",
+    english: "English",
+    bengali: "বাংলা",
+    toBengali: "বাংলা",
+    toEnglish: "English",
+    clearHistory: "ইতিহাস মুছুন",
+    clearAsk: "এই ডিভাইস থেকে এই কথোপকথন মুছে ফেলবেন?",
+    historyCleared: "চ্যাট মুছে ফেলা হয়েছে।",
+    settingsAction: "এপিআই কী ও মডেল",
+    settingsTitle: "সেটিংস",
+    modelLabel: "মডেল",
+    modelHint: "মডেল পরের বার্তা থেকে কার্যকর হবে।",
+    appearance: "অ্যাপিয়ারেন্স",
+    languageLabel: "ভাষা",
+    privacy:
+      "আপনার গ্রক এপিআই কী শুধু এই ফোনে সংরক্ষিত থাকে। চ্যাট ইতিহাস ফোনেই থাকে " +
+      "এবং উত্তর তৈরির জন্য শুধু গ্রকে পাঠানো হয়।",
+    aboutLine: `গ্রকচ্যাটবট ${APP_VERSION} · গ্রক + ক্যাপাসিটর`,
+    sysKeyOn: "গ্রক কী সংযুক্ত",
+    sysKeyOff: "গ্রক কী সংযুক্ত করুন",
+    sysHistory: "স্থানীয় চ্যাট ইতিহাস",
+    sysStreaming: "সরাসরি স্ট্রিমিং উত্তর",
+    menu: "ড্যাশবোর্ড খুলুন",
     keyTitleNew: "গ্রকে সংযোগ করুন",
     keyTitleExisting: "গ্রক সংযোগ",
     keyBodyNew:
@@ -127,21 +204,38 @@ const STRINGS = {
   },
 };
 
+/* -------------------------------------------------------------------------- */
+/* elements + state                                                           */
+/* -------------------------------------------------------------------------- */
 const $ = (id) => document.getElementById(id);
-const chatEl = $("chat");
-const welcomeEl = $("welcome");
-const inputEl = $("input");
-const sendBtn = $("sendBtn");
-const modelSel = $("model");
-const langBtn = $("langBtn");
-const newBtn = $("newBtn");
-const keyBtn = $("keyBtn");
-const topbar = $("topbar");
-const taglineEl = $("tagline");
+
+const ICON_ARROW =
+  '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" ' +
+  'stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>';
+const ICON_STOP =
+  '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2.4"/></svg>';
+
+const store = {
+  get(key, fallback = "") {
+    try {
+      const value = localStorage.getItem(key);
+      return value === null ? fallback : value;
+    } catch (_) {
+      return fallback;
+    }
+  },
+  set(key, value) {
+    try { localStorage.setItem(key, value); } catch (_) { /* private mode */ }
+  },
+  remove(key) {
+    try { localStorage.removeItem(key); } catch (_) { /* ignore */ }
+  },
+};
 
 const state = {
-  lang: localStorage.getItem("gc_lang") || "en",
-  model: localStorage.getItem("gc_model") || MODELS[0].id,
+  lang: store.get("gc_lang", "en"),
+  theme: store.get("gc_theme", "dark"),
+  model: store.get("gc_model", MODELS[0].id),
   messages: [],
   bubbles: [],
   busy: false,
@@ -149,41 +243,165 @@ const state = {
 };
 
 if (!STRINGS[state.lang]) state.lang = "en";
+if (!["dark", "light"].includes(state.theme)) state.theme = "dark";
+if (!MODELS.some((model) => model.id === state.model)) state.model = MODELS[0].id;
+
 const t = (key) => STRINGS[state.lang][key];
-const apiKey = () => localStorage.getItem("gc_key") || "";
+const apiKey = () => store.get("gc_key", "");
 
-/* ------------------------------------------------------------------ */
-/* text formatting                                                     */
-/* ------------------------------------------------------------------ */
-function escapeHtml(s) {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const chatEl = $("chat");
+const welcomeEl = $("welcome");
+const inputEl = $("input");
+const sendBtn = $("sendBtn");
+const modelSel = $("model");
+const taglineEl = $("tagline");
+const splashEl = $("splash");
+
+/* -------------------------------------------------------------------------- */
+/* formatting                                                                 */
+/* -------------------------------------------------------------------------- */
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
-function formatRich(text) {
-  const blocks = [];
-  let out = text.replace(/```[a-zA-Z0-9_+\-.#]*\n?([\s\S]*?)```/g, (_m, code) => {
-    blocks.push(escapeHtml(code.replace(/\n$/, "")));
-    return `\u0000${blocks.length - 1}\u0000`;
-  });
-  out = escapeHtml(out);
-  out = out.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
-  out = out.replace(/`([^`\n]+)`/g, "<code>$1</code>");
-  out = out.replace(
-    /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
-    '<a href="$2" target="_blank" rel="noopener">$1</a>'
+function formatRich(input) {
+  const codeBlocks = [];
+  let src = String(input || "").replace(
+    /```[a-zA-Z0-9_+\-.#]*\n?([\s\S]*?)```/g,
+    (_match, code) => {
+      codeBlocks.push(escapeHtml(code.replace(/\n$/, "")));
+      return `\u0000${codeBlocks.length - 1}\u0000`;
+    }
   );
-  out = out.replace(/\n/g, "<br>");
-  out = out.replace(/\u0000(\d+)\u0000/g, (_m, i) => `<pre><code>${blocks[+i]}</code></pre>`);
-  return out;
+  src = escapeHtml(src);
+
+  const inline = (text) =>
+    text
+      .replace(/\*\*([^*\n]+)\*\*/g, "<b>$1</b>")
+      .replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,!?:;]|$)/g, "$1<i>$2</i>")
+      .replace(/`([^`\n]+)`/g, "<code>$1</code>")
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_m, label, url) => {
+        const safe = url.replace(/"/g, "%22").replace(/'/g, "%27");
+        return `<a href="${safe}" target="_blank" rel="noopener">${label}</a>`;
+      });
+
+  const html = [];
+  let paragraph = [];
+  let quote = [];
+  let list = null;
+
+  const flushParagraph = () => {
+    if (paragraph.length) {
+      html.push(`<p>${inline(paragraph.join("<br>"))}</p>`);
+      paragraph = [];
+    }
+  };
+  const flushQuote = () => {
+    if (quote.length) {
+      html.push(`<blockquote>${inline(quote.join("<br>"))}</blockquote>`);
+      quote = [];
+    }
+  };
+  const flushList = () => {
+    if (list) {
+      html.push(`</${list}>`);
+      list = null;
+    }
+  };
+  const flushAll = () => {
+    flushParagraph();
+    flushQuote();
+    flushList();
+  };
+
+  for (const line of src.split("\n")) {
+    const trimmed = line.trim();
+
+    if (/^\u0000\d+\u0000$/.test(trimmed)) {
+      flushAll();
+      const index = Number(trimmed.replace(/\u0000/g, ""));
+      html.push(`<pre><code>${codeBlocks[index] || ""}</code></pre>`);
+      continue;
+    }
+
+    if (!trimmed) {
+      flushAll();
+      continue;
+    }
+
+    const heading = trimmed.match(/^(#{1,4})\s+(.*)$/);
+    if (heading) {
+      flushAll();
+      html.push(`<div class="md-h">${inline(heading[2])}</div>`);
+      continue;
+    }
+
+    if (/^(---+|___+|\*\*\*+)$/.test(trimmed)) {
+      flushAll();
+      html.push("<hr>");
+      continue;
+    }
+
+    const bullet = trimmed.match(/^[-*•]\s+(.*)$/);
+    if (bullet) {
+      flushParagraph();
+      flushQuote();
+      if (list !== "ul") {
+        flushList();
+        html.push("<ul>");
+        list = "ul";
+      }
+      html.push(`<li>${inline(bullet[1])}</li>`);
+      continue;
+    }
+
+    const numbered = trimmed.match(/^\d+[.)]\s+(.*)$/);
+    if (numbered) {
+      flushParagraph();
+      flushQuote();
+      if (list !== "ol") {
+        flushList();
+        html.push("<ol>");
+        list = "ol";
+      }
+      html.push(`<li>${inline(numbered[1])}</li>`);
+      continue;
+    }
+
+    if (trimmed.startsWith("&gt;")) {
+      flushParagraph();
+      flushList();
+      quote.push(trimmed.replace(/^&gt;\s?/, ""));
+      continue;
+    }
+
+    flushQuote();
+    flushList();
+    paragraph.push(line);
+  }
+
+  flushAll();
+  return html.join("").replace(/\u0000(\d+)\u0000/g, (_m, index) =>
+    `<pre><code>${codeBlocks[Number(index)] || ""}</code></pre>`
+  );
 }
 
-/* ------------------------------------------------------------------ */
-/* rendering                                                           */
-/* ------------------------------------------------------------------ */
-function scrollToEnd() {
+/* -------------------------------------------------------------------------- */
+/* rendering                                                                  */
+/* -------------------------------------------------------------------------- */
+function scrollToEnd(force = false) {
   requestAnimationFrame(() => {
-    chatEl.scrollTop = chatEl.scrollHeight;
+    const nearBottom =
+      chatEl.scrollHeight - chatEl.scrollTop - chatEl.clientHeight < 160;
+    if (force || nearBottom) chatEl.scrollTop = chatEl.scrollHeight;
   });
+}
+
+function setStatus(text) {
+  taglineEl.textContent = text || t("tagline");
 }
 
 function createBubble(role, text, { pending = false, error = false } = {}) {
@@ -198,12 +416,12 @@ function createBubble(role, text, { pending = false, error = false } = {}) {
 
   const copyBtn = document.createElement("button");
   copyBtn.className = "copy";
+  copyBtn.type = "button";
   copyBtn.textContent = t("copy");
   who.appendChild(copyBtn);
 
   const bubble = document.createElement("div");
   bubble.className = "bubble";
-
   const body = document.createElement("div");
   bubble.appendChild(body);
 
@@ -225,14 +443,16 @@ function createBubble(role, text, { pending = false, error = false } = {}) {
     setStreaming(next) {
       this.raw = next;
       body.textContent = next;
-      body.appendChild(makeCaret());
+      const caret = document.createElement("span");
+      caret.className = "caret";
+      body.appendChild(caret);
     },
     setPending() {
       body.innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
     },
-    setError(msg) {
-      this.raw = msg;
-      body.innerHTML = formatRich(msg);
+    setError(message) {
+      this.raw = message;
+      body.innerHTML = formatRich(message);
     },
     retranslate() {
       nameSpan.textContent = role === "user" ? t("you") : t("assistant");
@@ -246,21 +466,11 @@ function createBubble(role, text, { pending = false, error = false } = {}) {
     setTimeout(() => (copyBtn.textContent = t("copy")), 1200);
   });
 
-  if (pending) {
-    record.setPending();
-  } else {
-    record.setRaw(text);
-  }
+  if (pending) record.setPending();
+  else record.setRaw(text);
 
   state.bubbles.push(record);
   return record;
-}
-
-function makeCaret() {
-  const span = document.createElement("span");
-  span.style.color = "#4c8dff";
-  span.textContent = "▌";
-  return span;
 }
 
 function copyText(text) {
@@ -278,41 +488,51 @@ function fallbackCopy(text) {
   area.style.opacity = "0";
   document.body.appendChild(area);
   area.select();
-  try { document.execCommand("copy"); } catch (_) {}
+  try { document.execCommand("copy"); } catch (_) { /* ignore */ }
   area.remove();
 }
 
 function renderWelcome() {
-  welcomeEl.innerHTML = "";
-  const h = document.createElement("h2");
-  h.textContent = t("welcomeTitle");
-  const p = document.createElement("p");
-  p.textContent = t("welcomeSub");
-  welcomeEl.append(h, p);
+  $("welcomeTitle").textContent = t("welcomeTitle");
+  $("welcomeSub").textContent = t("welcomeSub");
+  const splashTag = $("splashTag");
+  if (splashTag) splashTag.textContent = t("tagline");
 
-  // One-tap setup straight from the welcome screen when no key is saved.
+  const connectWrap = $("connectWrap");
+  connectWrap.innerHTML = "";
   if (!apiKey()) {
     const connect = document.createElement("button");
     connect.type = "button";
     connect.className = "connect";
     connect.textContent = t("connectGroq");
     connect.addEventListener("click", () => openSettings());
-    welcomeEl.appendChild(connect);
+    connectWrap.appendChild(connect);
   }
 
-  const chips = document.createElement("div");
-  chips.id = "chips";
+  const chips = $("chips");
+  chips.innerHTML = "";
   t("suggestions").forEach((text) => {
-    const b = document.createElement("button");
-    b.textContent = text;
-    b.addEventListener("click", () => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.textContent = text;
+    chip.addEventListener("click", () => {
       inputEl.value = text;
       autoResize();
       send();
     });
-    chips.appendChild(b);
+    chips.appendChild(chip);
   });
-  welcomeEl.appendChild(chips);
+
+  welcomeEl.style.display = "";
+  document.body.classList.remove("chatting");
+}
+
+function hideWelcome() {
+  welcomeEl.style.display = "none";
+  document.body.classList.add("chatting");
+}
+
+function showWelcome() {
   welcomeEl.style.display = "";
   document.body.classList.remove("chatting");
 }
@@ -323,68 +543,161 @@ function rerenderWelcome() {
   if (chatting) hideWelcome();
 }
 
-function hideWelcome() {
-  welcomeEl.style.display = "none";
-  document.body.classList.add("chatting");
+/* -------------------------------------------------------------------------- */
+/* theme + language + model                                                   */
+/* -------------------------------------------------------------------------- */
+function applyTheme() {
+  document.documentElement.dataset.theme = state.theme;
+  store.set("gc_theme", state.theme);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute("content", state.theme === "dark" ? "#0b0f16" : "#eef3fa");
+  refreshThemeButtons();
+  refreshStats();
 }
 
-/* ------------------------------------------------------------------ */
-/* language + model                                                    */
-/* ------------------------------------------------------------------ */
-function applyLanguage() {
-  document.documentElement.lang = state.lang;
-  $("appTitle").textContent = t("appTitle");
-  taglineEl.textContent = t("tagline");
-  inputEl.placeholder = t("placeholder");
-  langBtn.textContent = state.lang === "en" ? "বাংলা" : "English";
-  newBtn.title = t("newChat");
-  modelSel.setAttribute("aria-label", "Model");
-  document.title = t("appTitle");
+function refreshThemeButtons() {
+  $("themeDark").classList.toggle("on", state.theme === "dark");
+  $("themeLight").classList.toggle("on", state.theme === "light");
+  $("themeDark").setAttribute("aria-pressed", String(state.theme === "dark"));
+  $("themeLight").setAttribute("aria-pressed", String(state.theme === "light"));
+  $("langEn").classList.toggle("on", state.lang === "en");
+  $("langBn").classList.toggle("on", state.lang === "bn");
+  $("langEn").setAttribute("aria-pressed", String(state.lang === "en"));
+  $("langBn").setAttribute("aria-pressed", String(state.lang === "bn"));
+}
 
-  const current = state.model;
+function setTheme(theme) {
+  if (!["dark", "light"].includes(theme) || theme === state.theme) return;
+  state.theme = theme;
+  applyTheme();
+}
+
+function toggleTheme() {
+  setTheme(state.theme === "dark" ? "light" : "dark");
+}
+
+function setLanguage(lang) {
+  if (!STRINGS[lang] || lang === state.lang) return;
+  state.lang = lang;
+  store.set("gc_lang", lang);
+  applyLanguage();
+}
+
+function refreshModelSelect() {
   modelSel.innerHTML = "";
-  MODELS.forEach((m) => {
+  MODELS.forEach((model) => {
     const option = document.createElement("option");
-    option.value = m.id;
-    option.textContent = `${m.name} · ${t("model" + m.tag[0].toUpperCase() + m.tag.slice(1))}`;
+    option.value = model.id;
+    option.textContent = `${model.name} · ${t("model" + model.tag[0].toUpperCase() + model.tag.slice(1))}`;
     modelSel.appendChild(option);
   });
-  modelSel.value = current;
-
-  state.bubbles.forEach((b) => b.retranslate());
-  rerenderWelcome();
-  refreshSendButton();
-  refreshKeyUi();
+  modelSel.value = state.model;
 }
 
-langBtn.addEventListener("click", () => {
-  state.lang = state.lang === "en" ? "bn" : "en";
-  localStorage.setItem("gc_lang", state.lang);
-  applyLanguage();
-});
+function applyLanguage() {
+  document.documentElement.lang = state.lang;
+  document.title = t("appTitle");
+  $("appTitle").textContent = t("appTitle");
+  if (!state.busy) setStatus(t("tagline"));
+  const splashTag = $("splashTag");
+  if (splashTag) splashTag.textContent = t("tagline");
+  inputEl.placeholder = t("placeholder");
+  $("menuBtn").setAttribute("aria-label", t("menu"));
+  $("newBtn").setAttribute("aria-label", t("newChat"));
+  $("newBtn").title = t("newChat");
+  $("drawerSub").textContent = t("dashboard");
+  $("drawerStatsLabel").textContent = t("atAGlance");
+  $("drawerActionsLabel").textContent = t("quickActions");
+  $("drawerSystemLabel").textContent = t("system");
+  $("statMessagesLabel").textContent = t("statMessages");
+  $("statModelLabel").textContent = t("statModel");
+  $("statLangLabel").textContent = t("statLang");
+  $("statThemeLabel").textContent = t("statTheme");
+  $("drawerNewText").textContent = t("newChat");
+  $("drawerLangText").textContent = state.lang === "en" ? t("toBengali") : t("toEnglish");
+  $("drawerClearText").textContent = t("clearHistory");
+  $("drawerSettingsText").textContent = t("settingsAction");
+  $("sysHistory").textContent = t("sysHistory");
+  $("sysStreaming").textContent = t("sysStreaming");
+  $("drawerVersion").textContent = `GroqChatbot ${APP_VERSION}`;
+  $("modalTitle").textContent = t("settingsTitle");
+  $("modelLabel").textContent = t("modelLabel");
+  $("modelHint").textContent = t("modelHint");
+  $("appearanceLabel").textContent = t("appearance");
+  $("languageLabel").textContent = t("languageLabel");
+  $("privacyNote").textContent = t("privacy");
+  $("aboutLine").textContent = t("aboutLine");
+  $("themeDark").textContent = t("themeDark");
+  $("themeLight").textContent = t("themeLight");
+  $("langEn").textContent = t("english");
+  $("langBn").textContent = t("bengali");
+  $("modalClose").setAttribute("aria-label", t("close"));
+  $("keyLink").textContent = t("keyGet");
+  $("removeBtn").textContent = t("keyRemove");
+  $("revealBtn").textContent =
+    $("keyInput").type === "password" ? t("keyShow") : t("keyHide");
+
+  refreshModelSelect();
+  state.bubbles.forEach((bubble) => bubble.retranslate());
+  rerenderWelcome();
+  refreshThemeButtons();
+  refreshKeyUi();
+  refreshSendButton();
+  refreshStats();
+}
+
+$("menuBtn").addEventListener("click", openDrawer);
+$("drawerClose").addEventListener("click", closeDrawer);
+$("newBtn").addEventListener("click", newChat);
 
 modelSel.addEventListener("change", () => {
   state.model = modelSel.value;
-  localStorage.setItem("gc_model", state.model);
+  store.set("gc_model", state.model);
+  refreshStats();
 });
 
-/* ------------------------------------------------------------------ */
-/* composer                                                            */
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
+/* drawer                                                                      */
+/* -------------------------------------------------------------------------- */
+function openDrawer() {
+  closeSettings();
+  refreshStats();
+  $("drawer").classList.add("open");
+  $("drawer").setAttribute("aria-hidden", "false");
+  $("scrim").classList.remove("hidden");
+}
+
+function closeDrawer() {
+  $("drawer").classList.remove("open");
+  $("drawer").setAttribute("aria-hidden", "true");
+  $("scrim").classList.add("hidden");
+}
+
+$("scrim").addEventListener("click", closeDrawer);
+$("drawerTheme").addEventListener("click", toggleTheme);
+$("drawerLang").addEventListener("click", () => setLanguage(state.lang === "en" ? "bn" : "en"));
+$("drawerSettings").addEventListener("click", () => openSettings());
+$("drawerNew").addEventListener("click", () => { closeDrawer(); newChat(); });
+$("drawerClear").addEventListener("click", () => { closeDrawer(); clearHistory(); });
+
+/* -------------------------------------------------------------------------- */
+/* composer                                                                    */
+/* -------------------------------------------------------------------------- */
 function autoResize() {
   inputEl.style.height = "auto";
-  inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + "px";
+  inputEl.style.height = Math.min(inputEl.scrollHeight, 128) + "px";
 }
 
 function refreshSendButton() {
+  document.body.classList.toggle("busy", state.busy);
   if (state.busy) {
-    sendBtn.textContent = "■";
-    sendBtn.classList.add("stop");
+    sendBtn.className = "stop";
+    sendBtn.innerHTML = ICON_STOP;
     sendBtn.disabled = false;
     sendBtn.setAttribute("aria-label", t("stop"));
   } else {
-    sendBtn.textContent = "↑";
-    sendBtn.classList.remove("stop");
+    sendBtn.className = "";
+    sendBtn.innerHTML = ICON_ARROW;
     sendBtn.disabled = !inputEl.value.trim();
     sendBtn.setAttribute("aria-label", t("send"));
   }
@@ -396,9 +709,7 @@ inputEl.addEventListener("input", () => {
 });
 
 inputEl.addEventListener("keydown", (event) => {
-  if (event.key !== "Enter" || event.shiftKey) return;
-  // On a touch keyboard Enter must insert a newline; the round button sends.
-  if (window.matchMedia("(pointer: coarse)").matches) return;
+  if (event.key !== "Enter" || event.shiftKey || event.isComposing) return;
   event.preventDefault();
   if (!state.busy) send();
 });
@@ -408,9 +719,9 @@ sendBtn.addEventListener("click", () => {
   else send();
 });
 
-/* ------------------------------------------------------------------ */
-/* send + stream                                                       */
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
+/* send + stream                                                               */
+/* -------------------------------------------------------------------------- */
 async function send() {
   const text = inputEl.value.trim();
   if (!text || state.busy) return;
@@ -424,6 +735,7 @@ async function send() {
   state.messages.push({ role: "user", content: text });
   createBubble("user", text);
   saveChat();
+  refreshStats();
 
   inputEl.value = "";
   autoResize();
@@ -431,10 +743,13 @@ async function send() {
   const bubble = createBubble("assistant", "", { pending: true });
   state.busy = true;
   refreshSendButton();
-  scrollToEnd();
+  setStatus(t("thinking"));
+  scrollToEnd(true);
 
   state.controller = new AbortController();
+  const controller = state.controller;
   let full = "";
+  let sawContent = false;
 
   try {
     const response = await fetch(API_URL, {
@@ -450,14 +765,19 @@ async function send() {
         max_tokens: 2048,
         stream: true,
       }),
-      signal: state.controller.signal,
+      signal: controller.signal,
     });
 
     if (!response.ok) {
       const raw = await response.text();
-      if (response.status === 401) throw new Error(t("keyInvalid"));
+      if (response.status === 401 || response.status === 403) throw new Error(t("keyInvalid"));
       if (response.status === 429) throw new Error(t("rateLimit"));
-      throw new Error(raw.slice(0, 300) || `HTTP ${response.status}`);
+      let detail = raw.slice(0, 300);
+      try {
+        const parsed = JSON.parse(raw);
+        detail = parsed?.error?.message || detail;
+      } catch (_) { /* plain text error */ }
+      throw new Error(detail || `HTTP ${response.status}`);
     }
 
     const reader = response.body.getReader();
@@ -469,11 +789,11 @@ async function send() {
       if (done) break;
       buffer += decoder.decode(value, { stream: true });
 
-      const events = buffer.split("\n\n");
+      const events = buffer.split(/\r?\n\r?\n/);
       buffer = events.pop() || "";
 
-      for (const evt of events) {
-        for (const line of evt.split("\n")) {
+      for (const event of events) {
+        for (const line of event.split(/\r?\n/)) {
           if (!line.startsWith("data:")) continue;
           const payload = line.slice(5).trim();
           if (!payload || payload === "[DONE]") continue;
@@ -481,11 +801,15 @@ async function send() {
             const json = JSON.parse(payload);
             const delta = json.choices?.[0]?.delta?.content || "";
             if (delta) {
+              if (!sawContent) {
+                sawContent = true;
+                setStatus(t("streaming"));
+              }
               full += delta;
               bubble.setStreaming(full);
               scrollToEnd();
             }
-          } catch (_) { /* partial json, ignore */ }
+          } catch (_) { /* partial JSON — wait for the next chunk */ }
         }
       }
     }
@@ -494,22 +818,25 @@ async function send() {
     state.messages.push({ role: "assistant", content: finalText || t("stopped") });
     bubble.setRaw(finalText || t("stopped"));
     saveChat();
-  } catch (err) {
-    if (err.name === "AbortError") {
+  } catch (error) {
+    if (error.name === "AbortError") {
       const partial = full.trim();
       state.messages.push({ role: "assistant", content: partial || t("stopped") });
       bubble.setRaw(partial || t("stopped"));
       saveChat();
     } else {
-      const message = err.message || t("netError");
+      const message = error.message || t("netError");
       bubble.el.classList.add("error");
       bubble.setError(message);
       if (message === t("keyInvalid")) openSettings(t("keyInvalid2"));
+      else if (!navigator.onLine) bubble.setError(t("netError"));
     }
   } finally {
+    if (state.controller === controller) state.controller = null;
     state.busy = false;
-    state.controller = null;
     refreshSendButton();
+    setStatus(t("tagline"));
+    refreshStats();
     scrollToEnd();
     if (state.bubbles.length) hideWelcome();
   }
@@ -519,52 +846,69 @@ function stopStreaming() {
   if (state.controller) state.controller.abort();
 }
 
-/* ------------------------------------------------------------------ */
-/* persistence                                                         */
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
+/* persistence + stats                                                        */
+/* -------------------------------------------------------------------------- */
 function saveChat() {
-  try {
-    localStorage.setItem("gc_chat", JSON.stringify(state.messages.slice(-60)));
-  } catch (_) { /* quota — ignore */ }
+  store.set("gc_chat", JSON.stringify(state.messages.slice(-60)));
 }
 
 function restoreChat() {
   let saved = [];
   try {
-    saved = JSON.parse(localStorage.getItem("gc_chat") || "[]");
+    saved = JSON.parse(store.get("gc_chat", "[]"));
   } catch (_) {
     saved = [];
   }
   if (!Array.isArray(saved) || !saved.length) return;
   state.messages = saved.filter(
-    (m) => m && typeof m.content === "string" && (m.role === "user" || m.role === "assistant")
+    (message) =>
+      message &&
+      typeof message.content === "string" &&
+      (message.role === "user" || message.role === "assistant")
   );
   if (!state.messages.length) return;
   hideWelcome();
-  state.messages.forEach((m) => createBubble(m.role, m.content));
-  scrollToEnd();
+  state.messages.forEach((message) => createBubble(message.role, message.content));
+  scrollToEnd(true);
 }
 
-/* ------------------------------------------------------------------ */
-/* new chat                                                            */
-/* ------------------------------------------------------------------ */
-newBtn.addEventListener("click", () => {
+function refreshStats() {
+  $("statMessages").textContent = String(state.messages.length);
+  const model = MODELS.find((item) => item.id === state.model) || MODELS[0];
+  $("statModel").textContent = model.name;
+  $("statLang").textContent = state.lang === "en" ? "EN" : "বাংলা";
+  $("statTheme").textContent = t(state.theme === "dark" ? "themeDark" : "themeLight");
+  $("drawerThemeText").textContent =
+    state.theme === "dark" ? t("switchLight") : t("switchDark");
+  if (state.theme === "dark") $("drawerTheme").querySelector(".drawerActionIcon").textContent = "🌙";
+  else $("drawerTheme").querySelector(".drawerActionIcon").textContent = "☀️";
+}
+
+function newChat() {
   if (state.busy) return;
   state.messages = [];
   state.bubbles = [];
-  [...chatEl.querySelectorAll(".msg")].forEach((n) => n.remove());
-  localStorage.removeItem("gc_chat");
+  [...chatEl.querySelectorAll(".msg")].forEach((node) => node.remove());
+  store.remove("gc_chat");
   renderWelcome();
   refreshSendButton();
-});
+  refreshStats();
+  inputEl.focus();
+}
 
-/* ------------------------------------------------------------------ */
-/* settings — guided Groq API key setup                                */
-/* ------------------------------------------------------------------ */
+function clearHistory() {
+  if (state.busy) return;
+  if (!window.confirm(t("clearAsk"))) return;
+  newChat();
+  toast(t("historyCleared"));
+}
+
+/* -------------------------------------------------------------------------- */
+/* settings — guided Groq API key setup                                       */
+/* -------------------------------------------------------------------------- */
 const KEY_PATTERN = /^gsk_[A-Za-z0-9_-]{20,}$/;
-const MODELS_URL = "https://api.groq.com/openai/v1/models";
 
-// Accept a bare key, "GROQ_API_KEY=…", "export GROQ_API_KEY=…", "Bearer …" or a quoted value.
 function cleanKey(raw) {
   return String(raw || "")
     .trim()
@@ -577,7 +921,8 @@ function cleanKey(raw) {
 
 function maskKey(key) {
   if (!key) return "";
-  return key.slice(0, 4) + "…" + key.slice(-4);
+  if (key.length <= 12) return key.slice(0, 3) + "…";
+  return key.slice(0, 6) + "…" + key.slice(-4);
 }
 
 let keyBusy = false;
@@ -599,11 +944,14 @@ function setKeyError(message) {
 
 function refreshKeyUi() {
   const key = apiKey();
-  const has = !!key;
+  const has = Boolean(key);
   const label = has ? t("keySet") : t("keyNotSet");
-  keyBtn.classList.toggle("needs-key", !has);
-  keyBtn.setAttribute("aria-label", label);
-  keyBtn.title = label;
+  $("keyBtn").classList.toggle("needs-key", !has);
+  $("keyBtn").setAttribute("aria-label", has ? t("settingsTitle") : label);
+  $("keyBtn").title = has ? t("settingsTitle") : label;
+
+  $("sysKey").textContent = has ? t("sysKeyOn") : t("sysKeyOff");
+  $("sysKeyDot").classList.toggle("ok", has);
 
   const meta = $("keyMeta");
   meta.textContent = has ? t("keyCurrent").replace("{key}", maskKey(key)) : "";
@@ -615,10 +963,11 @@ function refreshKeyUi() {
 }
 
 function openSettings(errorMessage) {
+  closeDrawer();
   keyBusy = false;
-  const has = !!apiKey();
+  const has = Boolean(apiKey());
 
-  $("modalTitle").textContent = t(has ? "keyTitleExisting" : "keyTitleNew");
+  $("modalTitle").textContent = t("settingsTitle");
   $("modalBody").textContent = t(has ? "keyBodyExisting" : "keyBodyNew");
   $("step1").textContent = t("keyStep1");
   $("step2").textContent = t("keyStep2");
@@ -632,13 +981,13 @@ function openSettings(errorMessage) {
   $("keyInput").type = "password";
   $("keyInput").value = apiKey();
 
+  refreshModelSelect();
+  refreshThemeButtons();
   setKeyError(errorMessage || "");
   refreshKeyUi();
 
   $("modal").classList.remove("hidden");
-
-  // Auto-focus only when the user actually needs to type something.
-  if (!has) setTimeout(() => $("keyInput").focus(), 120);
+  if (!has) setTimeout(() => $("keyInput").focus(), 140);
 }
 
 function closeSettings() {
@@ -652,7 +1001,6 @@ function toggleReveal() {
   $("revealBtn").textContent = show ? t("keyHide") : t("keyShow");
 }
 
-// Ask Groq whether the key works. Offline/timeout is not a rejection.
 async function testKey(key) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 12000);
@@ -666,7 +1014,7 @@ async function testKey(key) {
     }
     if (!response.ok) return { ok: false, reason: "unverified" };
     return { ok: true };
-  } catch (err) {
+  } catch (_) {
     return { ok: false, reason: "unverified" };
   } finally {
     clearTimeout(timer);
@@ -674,11 +1022,12 @@ async function testKey(key) {
 }
 
 function storeKey(key) {
-  localStorage.setItem("gc_key", key);
+  store.set("gc_key", key);
   $("keyInput").value = key;
   refreshKeyUi();
   rerenderWelcome();
   refreshSendButton();
+  refreshStats();
 }
 
 async function saveKey() {
@@ -713,10 +1062,8 @@ async function saveKey() {
     closeSettings();
     toast(t("keyOk"));
   } else if (result.reason === "invalid") {
-    // Do not overwrite a working key with a rejected one.
     setKeyError(t("keyInvalid2"));
   } else {
-    // Can't verify right now (offline / Groq hiccup) — keep it and say so.
     storeKey(key);
     closeSettings();
     toast(t("keySavedOffline"));
@@ -726,17 +1073,18 @@ async function saveKey() {
 function removeKey() {
   if (!apiKey()) return;
   if (!window.confirm(t("keyRemoveAsk"))) return;
-  localStorage.removeItem("gc_key");
+  store.remove("gc_key");
   $("keyInput").value = "";
   setKeyError("");
   closeSettings();
   refreshKeyUi();
   rerenderWelcome();
   refreshSendButton();
+  refreshStats();
   toast(t("keyRemoved"));
 }
 
-keyBtn.addEventListener("click", () => openSettings());
+$("keyBtn").addEventListener("click", () => openSettings());
 $("modalSave").addEventListener("click", saveKey);
 $("modalClose").addEventListener("click", closeSettings);
 $("revealBtn").addEventListener("click", toggleReveal);
@@ -753,21 +1101,34 @@ $("modal").addEventListener("click", (event) => {
   if (event.target === $("modal")) closeSettings();
 });
 
+$("themeDark").addEventListener("click", () => setTheme("dark"));
+$("themeLight").addEventListener("click", () => setTheme("light"));
+$("langEn").addEventListener("click", () => setLanguage("en"));
+$("langBn").addEventListener("click", () => setLanguage("bn"));
+
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !$("modal").classList.contains("hidden")) closeSettings();
+  if (event.key !== "Escape") return;
+  if (!$("modal").classList.contains("hidden")) closeSettings();
+  else if ($("drawer").classList.contains("open")) closeDrawer();
 });
 
-/* ------------------------------------------------------------------ */
-/* boot                                                                */
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
+/* boot                                                                       */
+/* -------------------------------------------------------------------------- */
+function hideSplash() {
+  if (!splashEl) return;
+  splashEl.classList.add("hide");
+  setTimeout(() => splashEl.remove(), 500);
+}
+
 function boot() {
-  state.model = localStorage.getItem("gc_model") || MODELS[0].id;
+  applyTheme();
   applyLanguage();
   restoreChat();
   autoResize();
   refreshSendButton();
+  refreshStats();
 
-  // Keep the newest message visible when the on-screen keyboard opens.
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", () => {
       autoResize();
@@ -775,10 +1136,11 @@ function boot() {
     });
   }
 
+  setTimeout(hideSplash, 850);
+
   if (!apiKey()) {
-    setTimeout(() => openSettings(), 350);
+    setTimeout(() => openSettings(), 1150);
   }
-  refreshKeyUi();
 }
 
 boot();

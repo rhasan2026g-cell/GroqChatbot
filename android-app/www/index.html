@@ -1,47 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
-  <meta name="theme-color" content="#0f131a" />
-  <title>Groq Chat</title>
+  <meta name="theme-color" content="#0b0f16" />
+  <meta name="color-scheme" content="dark light" />
+  <title>GroqChatbot</title>
+  <script>
+    try {
+      if (localStorage.getItem("gc_theme") === "light") {
+        document.documentElement.dataset.theme = "light";
+      }
+    } catch (e) { /* storage unavailable */ }
+  </script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header id="topbar">
-    <div class="brand">
-      <span class="logo">G</span>
-      <div class="brandText">
-        <h1 id="appTitle">Groq Chat</h1>
-        <p id="tagline">Fast, friendly AI chat</p>
+
+  <!-- ================= splash ================= -->
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splashMark">
+      <svg viewBox="0 0 48 48" width="54" height="54" fill="none" aria-hidden="true">
+        <path d="M14 16h20a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H24l-8 6v-6h-2a5 5 0 0 1-5-5v-8a5 5 0 0 1 5-5Z"
+              fill="#ffffff" />
+        <circle cx="18.5" cy="25" r="2.2" fill="#4c8dff" />
+        <circle cx="24" cy="25" r="2.2" fill="#4c8dff" />
+        <circle cx="29.5" cy="25" r="2.2" fill="#4c8dff" />
+      </svg>
+    </div>
+    <h1>GroqChatbot</h1>
+    <p id="splashTag">Fast Groq AI · English &amp; বাংলা</p>
+    <div class="spinner" aria-hidden="true"></div>
+  </div>
+
+  <!-- ================= app ================= -->
+  <div class="app-shell">
+    <header id="topbar">
+      <button id="menuBtn" class="icon" type="button" aria-label="Dashboard">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h11M4 17h16" /></svg>
+      </button>
+
+      <div class="brand">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.2-.6L4 21l1.3-3.7A8.4 8.4 0 1 1 21 11.5Z" />
+          </svg>
+        </span>
+        <div class="brandText">
+          <h1 id="appTitle">GroqChatbot</h1>
+          <p id="tagline">Fast Groq AI · English &amp; বাংলা</p>
+        </div>
       </div>
+
+      <div class="actions">
+        <button id="newBtn" class="icon" type="button" aria-label="New chat" title="New chat">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14" /></svg>
+        </button>
+        <button id="keyBtn" class="icon" type="button" aria-label="Settings" title="Settings">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3.1" />
+            <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1.11 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.08a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.08a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1Z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="chat">
+      <section id="welcome">
+        <div class="heroMark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="46" height="46" fill="none">
+            <path d="M14 16h20a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H24l-8 6v-6h-2a5 5 0 0 1-5-5v-8a5 5 0 0 1 5-5Z"
+                  fill="#ffffff" />
+            <circle cx="18.5" cy="25" r="2.2" fill="#4c8dff" />
+            <circle cx="24" cy="25" r="2.2" fill="#4c8dff" />
+            <circle cx="29.5" cy="25" r="2.2" fill="#4c8dff" />
+          </svg>
+        </div>
+        <h2 id="welcomeTitle"></h2>
+        <p id="welcomeSub"></p>
+        <div id="connectWrap"></div>
+        <div id="chips"></div>
+      </section>
+    </main>
+
+    <footer id="composer">
+      <textarea id="input" rows="1" placeholder="" enterkeyhint="send"></textarea>
+      <button id="sendBtn" type="button" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor"
+             stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" />
+        </svg>
+      </button>
+    </footer>
+  </div>
+
+  <!-- ================= dashboard drawer ================= -->
+  <div id="scrim" class="scrim hidden"></div>
+  <aside id="drawer" class="drawer" aria-hidden="true" aria-label="Dashboard">
+    <div class="drawerHead">
+      <div class="drawerBrand">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.2-.6L4 21l1.3-3.7A8.4 8.4 0 1 1 21 11.5Z" />
+          </svg>
+        </span>
+        <div>
+          <strong>GroqChatbot</strong>
+          <span id="drawerSub">Dashboard</span>
+        </div>
+      </div>
+      <button id="drawerClose" class="icon" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
     </div>
-    <div class="actions">
-      <select id="model" aria-label="Model"></select>
-      <button id="langBtn" class="ghost pill" aria-label="Language">বাংলা</button>
-      <button id="newBtn" class="ghost icon" aria-label="New chat">＋</button>
-      <button id="keyBtn" class="ghost icon" aria-label="Settings">⚙</button>
+
+    <div class="drawerBody">
+      <p class="sectionLabel" id="drawerStatsLabel">At a glance</p>
+      <div class="statGrid">
+        <div class="statCard">
+          <span class="statIcon">💬</span>
+          <span class="statValue" id="statMessages">0</span>
+          <span class="statLabel" id="statMessagesLabel">Messages</span>
+        </div>
+        <div class="statCard">
+          <span class="statIcon">⚡</span>
+          <span class="statValue small" id="statModel">GPT-OSS 20B</span>
+          <span class="statLabel" id="statModelLabel">Model</span>
+        </div>
+        <div class="statCard">
+          <span class="statIcon">🌐</span>
+          <span class="statValue small" id="statLang">EN</span>
+          <span class="statLabel" id="statLangLabel">Language</span>
+        </div>
+        <div class="statCard">
+          <span class="statIcon">🎨</span>
+          <span class="statValue small" id="statTheme">Dark</span>
+          <span class="statLabel" id="statThemeLabel">Theme</span>
+        </div>
+      </div>
+
+      <p class="sectionLabel" id="drawerActionsLabel">Quick actions</p>
+      <button class="drawerAction" id="drawerNew" type="button">
+        <span class="drawerActionIcon">✨</span>
+        <span id="drawerNewText">New chat</span>
+      </button>
+      <button class="drawerAction" id="drawerTheme" type="button">
+        <span class="drawerActionIcon">🌗</span>
+        <span id="drawerThemeText">Switch to light</span>
+      </button>
+      <button class="drawerAction" id="drawerLang" type="button">
+        <span class="drawerActionIcon">🌐</span>
+        <span id="drawerLangText">বাংলা</span>
+      </button>
+      <button class="drawerAction" id="drawerClear" type="button">
+        <span class="drawerActionIcon">🧹</span>
+        <span id="drawerClearText">Clear history</span>
+      </button>
+      <button class="drawerAction" id="drawerSettings" type="button">
+        <span class="drawerActionIcon">🔑</span>
+        <span id="drawerSettingsText">API key &amp; models</span>
+      </button>
+
+      <p class="sectionLabel" id="drawerSystemLabel">System</p>
+      <div class="statusList">
+        <div><span class="dot" id="sysKeyDot"></span><span id="sysKey">Connect your Groq key</span></div>
+        <div><span class="dot ok"></span><span id="sysHistory">Local chat history</span></div>
+        <div><span class="dot ok"></span><span id="sysStreaming">Live streaming replies</span></div>
+      </div>
+
+      <p class="drawerVersion" id="drawerVersion">GroqChatbot 1.1.0</p>
     </div>
-  </header>
+  </aside>
 
-  <main id="chat">
-    <section id="welcome">
-      <h2 id="welcomeTitle"></h2>
-      <p id="welcomeSub"></p>
-      <div id="chips"></div>
-    </section>
-  </main>
-
-  <footer id="composer">
-    <textarea id="input" rows="1" placeholder=""></textarea>
-    <button id="sendBtn" aria-label="Send">↑</button>
-  </footer>
-
+  <!-- ================= settings sheet ================= -->
   <div id="modal" class="modal hidden">
     <div class="card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="sheetHandle" aria-hidden="true"></div>
       <div class="cardHead">
-        <h3 id="modalTitle">Connect to Groq</h3>
-        <button id="modalClose" class="x" aria-label="Close">✕</button>
+        <h3 id="modalTitle">Settings</h3>
+        <button id="modalClose" class="x" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
       </div>
 
       <p id="modalBody"></p>
@@ -64,9 +210,30 @@
       <div class="modalActions">
         <a id="keyLink" href="https://console.groq.com/keys" target="_blank" rel="noopener"></a>
         <div class="spacer"></div>
-        <button id="removeBtn" class="ghost danger hidden">Remove</button>
-        <button id="modalSave">Save &amp; test</button>
+        <button id="removeBtn" class="ghost danger hidden" type="button">Remove</button>
+        <button id="modalSave" type="button">Save &amp; test</button>
       </div>
+
+      <div class="sheetDivider"></div>
+
+      <p class="sectionLabel" id="modelLabel">Model</p>
+      <select id="model" aria-label="Model"></select>
+      <p class="hint" id="modelHint">The model applies to your next message.</p>
+
+      <p class="sectionLabel" id="appearanceLabel">Appearance</p>
+      <div class="seg" id="themeSeg" role="group" aria-label="Theme">
+        <button type="button" data-theme="dark" id="themeDark">Dark</button>
+        <button type="button" data-theme="light" id="themeLight">Light</button>
+      </div>
+
+      <p class="sectionLabel" id="languageLabel">Language</p>
+      <div class="seg" id="langSeg" role="group" aria-label="Language">
+        <button type="button" data-lang="en" id="langEn">English</button>
+        <button type="button" data-lang="bn" id="langBn">বাংলা</button>
+      </div>
+
+      <p class="privacy" id="privacyNote"></p>
+      <p class="aboutLine" id="aboutLine"></p>
     </div>
   </div>
 

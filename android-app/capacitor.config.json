@@ -1,5 +1,6 @@
 {
   "appId": "com.rbk.groqchat",
-  "appName": "Groq Chat",
-  "webDir": "www"
+  "appName": "GroqChatbot",
+  "webDir": "www",
+  "backgroundColor": "#0B0F16"
 }

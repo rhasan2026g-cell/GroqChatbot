@@ -1,0 +1,12 @@
+# ---------------------------------------------------------------------------
+# Optional upgrades. The app works without every one of these:
+#   * semantic memory and hybrid RAG need sqlite-vec + sentence-transformers
+#   * python-docx improves .docx extraction (a stdlib reader is built in)
+#   * pytz adds extra timezone data on very old Python versions
+#
+#   python -m pip install -r requirements-optional.txt
+# ---------------------------------------------------------------------------
+sqlite-vec>=0.1.6
+sentence-transformers>=2.2.0
+python-docx>=1.1.0
+pytz>=2023.3

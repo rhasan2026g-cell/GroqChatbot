@@ -1,332 +1,432 @@
 <p align="center">
-  <img src="docs/banner.png" alt="GroqChatbot - Bilingual AI Agent with Long-Term Memory, RAG & AI Generation" width="100%">
+  <img src="docs/banner.png" alt="GroqChatbot — bilingual AI agent with memory, RAG, tools and a creation studio" width="100%">
 </p>
 
 <h1 align="center">GroqChatbot</h1>
 
 <p align="center">
-  <b>The Ultimate Bilingual AI Agent • Long-Term Memory • RAG • Image Generation • Tools • Cross-Platform</b><br>
-  Powered by Groq's ultra-fast LPU inference with SQLite + sqlite-vec memory system
+  <b>A bilingual AI agent for your desktop and phone — memory, documents, tools,<br>
+  and a creation studio, all running on Groq's LPU inference.</b>
 </p>
 
 <p align="center">
   <a href="https://www.python.org/"><img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white"></a>
   <a href="https://doc.qt.io/qtforpython/"><img alt="PySide6" src="https://img.shields.io/badge/PySide6-6.5%2B-41CD52?style=for-the-badge&logo=qt&logoColor=white"></a>
   <a href="https://capacitorjs.com/"><img alt="Capacitor 6" src="https://img.shields.io/badge/Capacitor-6-119EFF?style=for-the-badge&logo=capacitor&logoColor=white"></a>
-  <a href="https://github.com/asg017/sqlite-vec"><img alt="sqlite-vec" src="https://img.shields.io/badge/sqlite--vec-Vector_Memory-FF6B6B?style=for-the-badge"></a>
-  <a href="https://console.groq.com/"><img alt="Groq" src="https://img.shields.io/badge/Powered_by-Groq-000000?style=for-the-badge"></a>
-  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge"></a>
+  <a href="https://www.sqlite.org/"><img alt="SQLite" src="https://img.shields.io/badge/SQLite-Memory-003B57?style=for-the-badge&logo=sqlite&logoColor=white"></a>
+  <a href="https://console.groq.com/"><img alt="Groq" src="https://img.shields.io/badge/Groq-LPU-F55036?style=for-the-badge&logo=groq&logoColor=white"></a>
+  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge"></a>
+  <a href="https://github.com/rhasan2026g-cell/GroqChatbot/releases"><img alt="Release" src="https://img.shields.io/badge/Release-v1.1.0-8B5CF6?style=for-the-badge"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/rhasan2026g-cell/GroqChatbot/releases/latest"><img alt="Download APK" src="https://img.shields.io/badge/⬇️_Download-Android_APK_v1.0-4CAF50?style=for-the-badge&logo=android&logoColor=white"></a>
-  <a href="#quick-start"><img alt="Quick Start" src="https://img.shields.io/badge/🚀_Quick_Start-Get_Started-2196F3?style=for-the-badge"></a>
+  <a href="#-download--run">Download</a> ·
+  <a href="#-screenshots">Screenshots</a> ·
+  <a href="#-what-it-can-do">Features</a> ·
+  <a href="#-architecture">Architecture</a> ·
+  <a href="#-build-from-source">Build</a> ·
+  <a href="#-privacy--security">Privacy</a>
 </p>
 
-> **No account • No backend • 100% private.** Bring your own Groq API key. Everything runs locally with persistent agent memory powered by SQLite + vector search.
+---
 
-## ✨ Key Features
+**GroqChatbot** is a local-first chat app that actually remembers. It runs as a
+polished PySide6 desktop application on Windows, and as a signed 3.7 MB Capacitor
+APK on Android. Conversations, facts, documents and generated media stay on your
+machine — the only thing sent to Groq is the prompt you type.
 
-- 🤖 **True AI Agent** - Tool calling, reasoning, task planning, and autonomous multi-step execution
-- 🧠 **Long-Term Memory** - SQLite database with sqlite-vec for semantic vector search across all conversations
-- 📚 **RAG System** - Upload documents (PDF, TXT, DOCX, MD, JSON) and chat with them using retrieval-augmented generation
-- 🎨 **AI Image Generation** - Create images with Flux, Flux-Dev, Flux-Schnell, Stable Diffusion XL, SD 1.5
-- 🖼️ **Illustration Generator** - Generate custom illustrations and artwork
-- 🎵 **Music Generation** - Create AI music, beats, and soundtracks with MusicGen, AudioGen
-- 🎬 **Video Generation (Beta)** - Generate AI videos with Hunyuan Video, CogVideo
-- 🌐 **Multi-Provider Support** - HuggingFace, Replicate, Stability AI, Fal.ai, Together AI, OpenRouter
-- 🌐 **Bilingual by Default** - Seamless English & বাংলা support with automatic language detection
-- ⚡ **Lightning Fast** - Powered by Groq's ultra-fast LPU inference with real-time streaming
-- 🛠️ **Built-in Tools** - Web search, calculator, file system access, code execution, weather, datetime, and more
-- 🔐 **Privacy First** - API keys stay on your device. No telemetry, no analytics, no cloud sync
-- 📱 **Cross-Platform** - Beautiful native-like experience on Windows, macOS, Linux, and Android
-- 🎨 **Modern UI** - Clean, minimal interface with dark theme, splash screen, and smooth animations
-- 💾 **Persistent Memory** - Remembers facts about you, past conversations, and context across sessions
-- 🔍 **Semantic Recall** - Vector similarity search finds relevant memories even from weeks ago
-- 📁 **Document Chat** - Upload and query your own documents with RAG
-- 🗑️ **Memory Management** - Clear memories with one click
-- ⚙️ **Enhanced Settings** - More options and better control
+Write in English, get English. Write in বাংলা, get natural Bengali. Every label,
+tooltip and suggestion chip in the UI switches between the two languages instantly.
 
-## 🎯 What Makes It Different
+## ✨ What's new in 1.1
 
-GroqChatbot isn't just a chat interface—it's an intelligent agent that learns, remembers, and acts. With SQLite + sqlite-vec integration, it builds a personal knowledge base of your interactions, allowing for truly contextual conversations that improve over time.
+- **New desktop interface** — brand splash, dashboard sidebar, four stat cards, a
+  7‑day activity chart, quick actions and live system badges.
+- **Settings & system dialog** — five tabs (Chat & agent, API keys, Memory & RAG,
+  Creation studio, About) with theme, accent colour and compact-spacing controls.
+- **In-app database browser** — inspect `conversations`, `facts`, the vector index,
+  `documents` and `rag_chunks`, filter, export JSON and open the data folder.
+- **Tool workbench** — run any agent tool by hand, read its JSON schema and see
+  exactly what the model can do; permissions for file writes, Python and network.
+- **Creation studio** — image, illustration, music and video generation with
+  provider detection and a gallery of recent outputs.
+- **Redesigned Android app** — matching splash screen, dashboard drawer, settings
+  sheet, dark/light themes and SVG icons; version 1.1.0 (versionCode 2).
+- **Polished chat rendering** — GitHub-style Markdown, syntax-highlighted code,
+  Unicode math (no LaTeX noise), per-message copy, regenerate and Markdown export.
+- **Safer key handling** — guided three-step setup, `gsk_` validation, live test,
+  show/hide, masked preview, remove; keys are stored in `.env` (desktop) or the
+  app's private storage (Android), never in the repository.
 
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/desktop_chat_en.png" alt="Desktop Agent Interface" width="800">
+  <img src="docs/screenshots/desktop-dark.png" alt="GroqChatbot desktop, dark theme" width="860">
 </p>
-<p align="center"><i>Desktop agent with tool calling and streaming responses</i></p>
+<p align="center"><i>Desktop — streaming chat, memory context and the live dashboard</i></p>
+
+<p align="center">
+  <img src="docs/screenshots/desktop-light.png" alt="GroqChatbot desktop, light theme" width="860">
+</p>
+<p align="center"><i>The same workspace in the light theme</i></p>
 
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/screenshots/android_chat_en.png" alt="Android English" width="250"><br><b>Android (English)</b></td>
-    <td align="center"><img src="docs/screenshots/android_chat_bn.png" alt="Android Bengali" width="250"><br><b>Android (বাংলা)</b></td>
-    <td align="center"><img src="docs/screenshots/android_key_setup.png" alt="API Key Setup" width="250"><br><b>Secure Key Setup</b></td>
+    <td align="center"><img src="docs/screenshots/desktop-database-light.png" alt="Database browser" width="420"><br><b>Database browser</b><br><sub>Every conversation, fact and chunk</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-tools-dark.png" alt="Tool workbench" width="380"><br><b>Tool workbench</b><br><sub>Run tools by hand</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/desktop-studio-light.png" alt="Creation studio" width="420"><br><b>Creation studio</b><br><sub>Images, music and video</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop-settings-dark.png" alt="Settings and system" width="340"><br><b>Settings &amp; system</b><br><sub>Models, keys, memory, theme</sub></td>
   </tr>
 </table>
 
-## 🧠 Memory & RAG Architecture
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/screenshots/android-dark.png" alt="Android dark theme" width="210"><br><b>Android — dark</b></td>
+    <td align="center"><img src="docs/screenshots/android-light.png" alt="Android light theme" width="210"><br><b>Android — light</b></td>
+    <td align="center"><img src="docs/screenshots/android-bengali.png" alt="Android in Bengali" width="210"><br><b>Android — বাংলা</b></td>
+    <td align="center"><img src="docs/screenshots/android-drawer.png" alt="Android dashboard drawer" width="210"><br><b>Dashboard drawer</b></td>
+  </tr>
+</table>
+
+## 🎯 What it can do
+
+### 💬 Chat that feels instant
+Replies stream token by token, with a stop button that keeps the partial answer,
+regenerate, copy per message and one-click Markdown export. Markdown is rendered
+properly: headings, lists, quotes, tables, links and fenced code with syntax
+colours. Arithmetic is normalised to Unicode symbols so `\frac{1}{2}` never leaks
+into the chat.
+
+### 🧠 Memory that survives restarts
+Every message is written to SQLite. When you mention your name, city, work or a
+preference, the app extracts that fact with pattern matching and stores it. On the
+next question the most relevant memories are pulled back into the prompt — so you
+don't repeat yourself.
+
+- **With** `sqlite-vec` + `sentence-transformers`: semantic recall over
+  `all-MiniLM-L6-v2` embeddings (384 dimensions).
+- **Without** them: the app falls back to FTS5/keyword search. The dashboard says
+  which mode is active, so you always know what is running.
+
+### 📚 Chat with your documents (RAG)
+Drop in a PDF, Word file, spreadsheet, HTML page or plain text. The app extracts
+the text, chunks it with overlap, indexes it and cites the matching passages in
+the prompt. Supported: `.pdf`, `.docx`, `.xlsx`, `.csv`, `.txt`, `.md`, `.json`,
+`.html`, `.htm`.
+
+### 🛠️ Ten agent tools
+The model decides when a tool is needed, calls it, and synthesises the result.
+
+| Tool | What it does |
+|---|---|
+| `web_search` | Current information, news and prices (DuckDuckGo) |
+| `fetch_url` | Download a page and return readable text |
+| `calculator` | Safe arithmetic, percentages, roots, trig, logs |
+| `get_current_time` | Date and time in any IANA time zone |
+| `read_file` | Read a UTF-8 file from your home or the app folder |
+| `write_file` | Create or overwrite a file *(opt-in permission)* |
+| `list_files` | Explore folders |
+| `execute_python` | Run a short snippet in an isolated process *(opt-in permission)* |
+| `get_weather` | Current conditions for a city |
+| `random_number` | Random integer in an inclusive range |
+
+### 🎨 Creation studio
+Generate images, illustrations, music and video from a prompt, with a negative
+prompt, aspect size and a gallery. Providers are auto-detected from your `.env`:
+
+| Provider | Env var | Used for |
+|---|---|---|
+| HuggingFace Inference | `HUGGINGFACE_API_KEY` | Images, illustrations, music |
+| Replicate | `REPLICATE_API_TOKEN` | Images, music, video |
+| fal.ai | `FAL_KEY` | Images, video |
+| Stability AI | `STABILITY_API_KEY` | Images |
+| Together AI | `TOGETHER_API_KEY` | Images |
+| OpenRouter | `OPENROUTER_API_KEY` | Images |
+
+Models include FLUX.1 Schnell, FLUX.1 Dev, SDXL, MusicGen (small/medium/large),
+Hunyuan Video and CogVideoX 5B. Only providers whose keys are present are enabled;
+the studio shows how many are configured.
+
+### 📊 A dashboard, not a mystery
+The sidebar shows messages, facts, documents and tokens, a 7-day activity chart,
+quick actions for the database/tools/studio/upload, and live badges for memory
+mode, search mode, provider count and the exact data folder in use.
+
+### 🌗 Two languages, two themes, four accents
+English ⇄ বাংলা covers every string, including the system prompt instruction that
+makes replies follow your language. Dark and light palettes are hand-tuned (not
+inverted), with blue, violet, teal and rose accents.
+
+## 🏗️ Architecture
 
 ```mermaid
-graph LR
-    subgraph Input["Document Input"]
-        PDF["📄 PDF"]
-        TXT["📝 TXT"]
-        DOCX["📃 DOCX"]
-        User["💬 User Query"]
+flowchart LR
+    subgraph UI["Desktop — PySide6"]
+        Chat["Chat view<br/>streaming bubbles"]
+        Dash["Dashboard<br/>stats + chart"]
+        Dlg["Dialogs<br/>settings · db · tools · studio"]
     end
-    
-    subgraph Processing["Processing"]
-        Chunk["✂️ Text Chunking"]
-        Embed["🔢 Embeddings<br/>SentenceTransformers"]
+
+    subgraph Core["Python core"]
+        Agent["Agent loop<br/>tool calling"]
+        Mem["MemorySystem<br/>SQLite + FTS5"]
+        RAG["RAGSystem<br/>chunk + retrieve"]
+        Gen["GenerationStudio<br/>providers"]
     end
-    
-    subgraph Storage["Vector Storage"]
-        SQLite["🗄️ SQLite"]
-        VecDB["🔍 sqlite-vec<br/>Vector Store"]
+
+    subgraph Local["On your machine"]
+        DB[("memory.db<br/>conversations · facts<br/>documents · chunks")]
+        Files["data/generated<br/>images · audio · video"]
+        Env[".env<br/>keys"]
     end
-    
-    subgraph Retrieval["RAG Retrieval"]
-        Search["🎯 Semantic Search"]
-        Context["📋 Context Building"]
-        Augment["✨ Prompt Augmentation"]
-    end
-    
-    PDF --> Chunk
-    TXT --> Chunk
-    DOCX --> Chunk
-    Chunk --> Embed
-    Embed --> VecDB
-    SQLite --> VecDB
-    
-    User --> Search
-    VecDB --> Search
-    Search --> Context
-    Context --> Augment
-    Augment --> LLM["⚡ Groq LLM"]
-    
-    style VecDB fill:#4ade8022,stroke:#4ade80
-    style LLM fill:#ff6b6b22,stroke:#ff6b6b
+
+    Groq["Groq API<br/>GPT-OSS · Qwen"]
+
+    Chat --> Agent
+    Dash --> Mem
+    Dash --> RAG
+    Dlg --> Mem
+    Dlg --> Gen
+    Agent --> Mem
+    Agent --> RAG
+    Agent -->|stream| Groq
+    Mem --> DB
+    RAG --> DB
+    Gen --> Files
+    Dlg --> Env
+
+    style Groq fill:#F5503622,stroke:#F55036
+    style DB fill:#4C8DFF22,stroke:#4C8DFF
 ```
 
-## 🎨 AI Generation Capabilities
-
-| Feature | Status | Models | Providers | Description |
-|---------|--------|---------|-----------|-------------|
-| 🖼️ **Image Generation** | ✅ Available | Flux, Flux-Dev, Flux-Schnell, SDXL, SD 1.5 | HuggingFace, Replicate, Stability AI | Create stunning images from text prompts |
-| 🎨 **Illustrations** | ✅ Available | Flux, Flux-Dev | HuggingFace | Generate custom illustrations and artwork |
-| 🎵 **Music Generation** | ✅ Available | MusicGen, MusicGen-Medium, MusicGen-Large, AudioGen | HuggingFace | Create AI music, beats, and soundtracks |
-| 🎬 **Video Generation** | ⚠️ Beta | Hunyuan Video, CogVideo | HuggingFace | Generate AI videos from text prompts |
-| 🎞️ **Animations** | 🔄 Coming Soon | AnimateDiff | HuggingFace, Replicate | Create short animations and GIFs |
-
-**Quick Start for Generation:**
-```bash
-# Add your HuggingFace API key (free)
-echo "HUGGINGFACE_API_KEY=hf_xxx" >> .env
-```
-
-Get free API keys:
-- [HuggingFace](https://huggingface.co/settings/tokens) - Free tier available for most models
-- [Replicate](https://replicate.com/account/api-tokens) - Pay per use, generous free credits
-- [Stability AI](https://platform.stability.ai/account/keys) - Free credits available
-- [Fal.ai](https://fal.ai/dashboard/keys) - Fast inference, free credits
-- [Together AI](https://api.together.xyz/settings/api-keys) - Multiple models available
-
-
-
-## 🔄 Agent Workflow
+### How one message flows
 
 ```mermaid
 sequenceDiagram
-    actor User
+    actor You
     participant UI as Chat UI
-    participant Agent as Agent Orchestrator
-    participant Memory as Memory (SQLite+vec)
-    participant Tools as Tool Executor
-    participant LLM as Groq LLM
-    
-    User->>UI: Send Query
-    UI->>Agent: Process Request
-    
-    Agent->>Memory: Search relevant memories (vector similarity)
-    Memory-->>Agent: Return top-k memories
-    
-    Agent->>LLM: Plan with context + memories
-    LLM-->>Agent: Decide: Answer directly or use tools
-    
-    alt Needs Tools
-        Agent->>Tools: Execute required tools
-        Tools-->>Agent: Tool results
-        Agent->>LLM: Synthesize with tool results
+    participant Agent as Agent loop
+    participant Mem as Memory
+    participant RAG as Documents
+    participant Tools as Tools
+    participant Groq as Groq
+
+    You->>UI: Type a message
+    UI->>Mem: Save message + extract facts
+    UI->>Mem: Search relevant memories
+    UI->>RAG: Retrieve matching chunks
+    Mem-->>Agent: Memories + facts
+    RAG-->>Agent: Document context
+    Agent->>Groq: Prompt + context + tool schemas
+    alt The model calls a tool
+        Groq-->>Agent: tool_call
+        Agent->>Tools: Run it
+        Tools-->>Agent: JSON result
+        Agent->>Groq: Continue with the result
     end
-    
-    LLM-->>Agent: Final response (streaming)
-    Agent->>Memory: Store conversation + extract facts
-    Agent->>Memory: Generate embeddings & save to vector store
-    Agent-->>UI: Stream response to user
-    UI-->>User: Display answer
+    Groq-->>UI: Streamed tokens
+    UI-->>You: Rendered answer
+    UI->>Mem: Save reply
 ```
 
-## 🛠️ Built-in Agent Tools
+## 📁 Project structure
 
-| Tool | Description | Use Case |
-|---|---|---|
-| `web_search` | Search the web in real-time | Current events, facts, news |
-| `calculator` | Evaluate mathematical expressions | Calculations, conversions |
-| `get_current_time` | Get current time/date in any timezone | Scheduling, reminders |
-| `file_read/write` | Read and write local files | Document processing, notes |
-| `execute_python` | Run Python code safely in sandbox | Data analysis, automation |
-| `weather` | Get weather information | Travel planning |
-| `remember_fact` | Store important facts in long-term memory | User preferences, details |
-| `recall_memory` | Semantic search through past conversations | Context retrieval |
-| `summarize_conversation` | Summarize long conversations | Quick reviews |
+```text
+GroqChatbot/
+├── My Chatbot.py          # the desktop application (entry point)
+├── app.py                 # tiny launcher — same app
+├── ui_theme.py            # palettes, stylesheet, logo, splash, icon export
+├── ui_widgets.py          # stat cards, badges, activity chart
+├── ui_dialogs.py          # settings, database, tools, studio, key, about
+├── memory_system.py       # SQLite memory, facts, optional sqlite-vec
+├── rag_system.py          # document ingestion, chunking, retrieval
+├── agent_tools.py         # ten tools + permissions
+├── generation.py          # image/music/video providers
+├── app_paths.py           # dev vs frozen data directories
+├── android-app/
+│   ├── www/               # the whole Android UI (HTML/CSS/JS)
+│   └── android/           # Capacitor native project
+├── docs/
+│   ├── banner.png
+│   ├── social-preview.png
+│   └── screenshots/
+├── assets/                # app icons used by PyInstaller
+└── requirements.txt       # core desktop dependencies
+```
 
-## 🤖 Available Models
+## 🚀 Download & run
 
-| Model | Speed | Capability | Best For |
-|---|---|---|---|
-| `openai/gpt-oss-20b` | ⚡⚡⚡ Very Fast | Great | General chat, quick tasks, coding help |
-| `openai/gpt-oss-120b` | ⚡⚡ Fast | Excellent | Complex reasoning, agent tasks, analysis |
-| `qwen/qwen3.8-27b` | ⚡⚡⚡ Very Fast | Great | Multilingual, creative tasks, Bengali responses |
+### Windows — ready-to-run EXE
 
-## 🚀 Quick Start
+1. Download **`GroqChatbot-v1.1.exe`** from [Releases](https://github.com/rhasan2026g-cell/GroqChatbot/releases).
+2. Run it. No Python install needed.
+3. On first launch, paste your free [Groq API key](https://console.groq.com/keys).
+   The dialog walks you through creating one.
 
-### Prerequisites
-- Python 3.10 or higher
-- [Groq API Key](https://console.groq.com/keys) (free)
-- Git
+> The EXE is unsigned, so SmartScreen may show "Windows protected your PC".
+> Choose **More info → Run anyway** — the source is in this repository.
 
-### Desktop Installation
+### Android — signed APK
+
+1. Download **`GroqChatbot-v1.1.apk`** from [Releases](https://github.com/rhasan2026g-cell/GroqChatbot/releases).
+2. Allow "install unknown apps" for your file manager, then tap the APK.
+3. Open **GroqChatbot** and connect your key in the guided sheet.
+
+Android 5.1 (API 22) or newer. See [ANDROID.md](ANDROID.md) for details.
+
+### From source
 
 ```bash
-# Clone the repository
 git clone https://github.com/rhasan2026g-cell/GroqChatbot.git
 cd GroqChatbot
 
-# Create virtual environment
 python -m venv .venv
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS / Linux
 
-# Activate (Windows)
-.venv\Scripts\activate
-
-# Activate (macOS/Linux)
-source .venv/bin/activate
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Run the app
 python "My Chatbot.py"
 ```
 
-On first launch, you'll be guided to add your Groq API key. It will be saved securely in `.env`.
+Optional upgrades (semantic memory, better `.docx` extraction):
 
-### Android Installation
-
-**Option 1: Download APK (Easiest)**
-1. Download `GroqChatbot-v1.0.apk` from [Releases](https://github.com/rhasan2026g-cell/GroqChatbot/releases)
-2. Install on your Android device (allow unknown sources)
-3. Add your API key on first launch
-
-**Option 2: Build from source**
 ```bash
-cd android-app
-npm install
-npx cap sync android
-cd android
-./gradlew assembleDebug  # or assembleRelease
+pip install -r requirements-optional.txt
 ```
 
-See [ANDROID.md](ANDROID.md) for detailed build instructions.
+## ⚙️ Configuration
 
-## 🔧 Configuration
-
-### Environment Variables
-Copy `.env.example` to `.env` and configure:
+Copy `.env.example` to `.env` and fill in what you need. Only `GROQ_API_KEY` is
+required.
 
 ```env
-GROQ_API_KEY=your_groq_api_key_here
+# Required
+GROQ_API_KEY=gsk_...
+
+# Optional generation providers
+HUGGINGFACE_API_KEY=
+REPLICATE_API_TOKEN=
+STABILITY_API_KEY=
+FAL_KEY=
+TOGETHER_API_KEY=
+OPENROUTER_API_KEY=
+
+# Agent tuning
 EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 MEMORY_ENABLED=true
-MAX_MEMORY_RESULTS=10
+RAG_ENABLED=true
 AGENT_MODE=true
+MAX_MEMORY_RESULTS=10
+MAX_RAG_RESULTS=3
 ```
 
-### Memory Database
-The agent automatically creates `memory.db` in the project directory with:
-- **conversations** table - Full chat history
-- **facts** table - Extracted user facts and preferences
-- **vec_memories** virtual table - Vector embeddings for semantic search (sqlite-vec)
-- **summaries** table - Conversation summaries for context compression
+The desktop app writes the key to `.env` for you (right next to the source, or in
+`%LOCALAPPDATA%\GroqChatbot` for the packaged EXE). Data lives in `data/` while
+developing and in `%LOCALAPPDATA%\GroqChatbot` when frozen — the dashboard always
+shows the exact path.
 
-## 📦 Dependencies
+## 🔨 Build from source
 
-### Desktop
-```txt
-PySide6>=6.5.0
-groq>=0.5.0
-python-dotenv>=1.0.0
-sqlite-vec>=0.0.1-alpha.10
-sentence-transformers>=2.2.0
-httpx>=0.25.0
-beautifulsoup4>=4.12.0
-duckduckgo-search>=3.9.0
-pydantic>=2.0.0
+### Desktop EXE
+
+```powershell
+pip install -r requirements.txt
+python -m PyInstaller --noconfirm --clean --onefile --windowed ^
+  --name GroqChatbot-v1.1 --icon assets\app_icon.ico ^
+  --hidden-import groq --collect-all groq "My Chatbot.py"
+# → dist\GroqChatbot-v1.1.exe
 ```
 
-### Android
-Built with Capacitor 6, vanilla HTML/CSS/JS for maximum performance and minimal size.
+### Android APK
 
-## 🧪 Testing
+```powershell
+$env:JAVA_HOME    = "C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot"
+$env:ANDROID_HOME = "C:\Android\sdk"
 
-```bash
-# Run all tests
-python -m pytest -v
-
-# Run specific test suites
-python -m pytest tests/test_agent.py -v
-python -m pytest tests/test_memory.py -v
+cd android-app
+npx cap sync android
+cd android
+.\gradlew.bat assembleRelease
+# → app\build\outputs\apk\release\app-release.apk
 ```
+
+Capacitor 6 is pinned on purpose: Capacitor 7 needs JDK 21 and SDK 35. The app
+talks to Groq directly from the WebView; no backend or proxy is involved.
+
+## 🔐 Privacy & security
+
+- **No backend, no telemetry, no accounts.** There is nothing between you and Groq.
+- **Keys stay local.** `.env` and the Android app's private storage only. `.env`,
+  keystores and databases are git-ignored.
+- **Memory stays local.** SQLite files live in your data folder; nothing is synced.
+- **Tool permissions are explicit.** File writes, Python execution and network
+  access can each be switched off in the Tool workbench.
+- **Generated media stays local.** Outputs land in `data/generated/`.
+- Android traffic goes only to `api.groq.com` (and the generation provider you
+  configure, on desktop).
+
+Found a problem? Open an issue or read [SECURITY.md](SECURITY.md).
+
+## ⚠️ Honest limitations
+
+- **Android is chat-only.** Memory, RAG, tools and the studio are desktop features.
+  The phone keeps history locally and streams replies.
+- **Semantic recall is optional.** Without `sqlite-vec` and
+  `sentence-transformers`, memory search uses FTS5 keywords — good, not magic.
+  The dashboard shows which mode is active.
+- **Video generation is experimental.** Provider queues and formats vary; failures
+  are reported in the studio instead of being hidden.
+- **Weather uses a free public endpoint.** It can rate-limit; the model is told to
+  say so and continue.
+- **The EXE is unsigned.** SmartScreen warnings are expected for sideloaded builds.
+
+## 🗺️ Roadmap
+
+- [ ] Streaming on Android through a shared event parser with desktop
+- [ ] Local embeddings bundled so semantic memory works out of the box
+- [ ] Conversation branching and full-text search inside the app
+- [ ] More providers and an image-to-image workflow
+- [ ] macOS / Linux packaging
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md)
+first, keep the UI bilingual, and never commit keys or databases.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 🔒 Security
-
-- API keys are never logged or transmitted except to Groq's official API
-- All memory is stored locally in SQLite
-- No third-party analytics or tracking
-- See [SECURITY.md](SECURITY.md) for reporting vulnerabilities
+```bash
+git checkout -b feature/your-idea
+# make changes
+git commit -m "Add your idea"
+git push origin feature/your-idea
+```
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT — see [LICENSE](LICENSE).
 
-## 🙏 Acknowledgments
+## 🙏 Built with
 
-- [Groq](https://groq.com/) for blazing fast LPU inference
-- [sqlite-vec](https://github.com/asg017/sqlite-vec) for vector search in SQLite
-- [PySide6](https://doc.qt.io/qtforpython/) for the beautiful desktop UI
-- [Capacitor](https://capacitorjs.com/) for cross-platform mobile deployment
-- [Sentence Transformers](https://www.sbert.net/) for local embeddings
+[Groq](https://groq.com/) · [PySide6](https://doc.qt.io/qtforpython/) ·
+[SQLite](https://sqlite.org/) · [sqlite-vec](https://github.com/asg017/sqlite-vec) ·
+[sentence-transformers](https://www.sbert.net/) · [Capacitor](https://capacitorjs.com/) ·
+[Pillow](https://python-pillow.org/)
 
-## ⭐ Star History
+## 🔎 Topics
 
-If you find this project useful, please consider giving it a star! It helps others discover it.
-
-[![Star History Chart](https://api.star-history.com/svg?repos=rhasan2026g-cell/GroqChatbot&type=Date)](https://star-history.com/#rhasan2026g-cell/GroqChatbot&Date)
+`groq` · `ai-agent` · `bilingual` · `bengali` · `bangla` · `pyside6` ·
+`desktop-app` · `android` · `capacitor` · `llm` · `rag` · `sqlite-vec` ·
+`long-term-memory` · `tool-calling` · `image-generation` · `music-generation` ·
+`local-first` · `privacy` · `python`
 
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/rhasan2026g-cell">rhasan2026g-cell</a><br>
-  <sub>Powered by Groq • Built with Python & JavaScript</sub>
+  <img src="docs/social-preview.png" alt="GroqChatbot 1.1.0" width="720">
+</p>
+
+<p align="center">
+  Made with care by <a href="https://github.com/rhasan2026g-cell">rhasan2026g-cell</a><br>
+  <sub>Powered by Groq LPUs · Python on the desktop · JavaScript on the phone</sub>
 </p>

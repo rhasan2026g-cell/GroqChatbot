@@ -4,6 +4,76 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] — 2026-10-26
+
+A full interface release: the desktop app gains a dashboard, real system
+dialogs and a database browser, the Android app is redesigned to match, and both
+ship as fresh signed builds.
+
+### Added
+
+- **Desktop dashboard** — messages, facts, documents and tokens in four stat
+  cards, a 7-day activity chart with weekday labels and a highlighted today, six
+  quick actions (Database, Tools, Studio, Upload, Memories, Data) and live badges
+  for memory mode, search mode, provider count and the active data folder.
+- **Brand splash screen** — gradient mark, version, and a "starting local
+  systems" status while SQLite, memory and RAG warm up.
+- **Settings & system dialog** — five tabs (Chat & agent, API keys, Memory & RAG,
+  Creation studio, About) with model, language, theme, accent colour, compact
+  spacing, temperature, token budget, retained turns, editable system prompt,
+  reset, key management and memory/RAG diagnostics.
+- **In-app database browser** (`Ctrl+D`) — tabs for conversations, facts, the
+  vector index, documents and RAG chunks; filter the current table, refresh,
+  export JSON, open the data folder and delete selected rows.
+- **Tool workbench** — every tool with its description and JSON schema, a
+  runnable argument editor, "Insert example", live result pane and explicit
+  permissions for file writes, Python execution and network access.
+- **Creation studio** — image, illustration, music and video tabs with model
+  choice, negative prompt, width/height, duration, "Surprise me", provider
+  detection, a preview pane and recent outputs.
+- **Guided key dialog** — three numbered steps, `gsk_` validation, live test
+  against Groq, show/hide, masked preview and remove; writes to `.env` on desktop.
+- **Agent tools** — web search, page reader, calculator, current time, read/write
+  files, list files, isolated Python, weather and random numbers, with
+  permission gates.
+- **Document Q&A (RAG)** — PDF, DOCX, XLSX, CSV, TXT, Markdown, JSON and HTML
+  ingestion, overlapping chunks, and cited passages injected into the prompt.
+- **Optional semantic memory** — `sqlite-vec` + `sentence-transformers`
+  (`all-MiniLM-L6-v2`, 384-dim) with an automatic FTS5 keyword fallback and a
+  visible badge telling you which one is active.
+- **Desktop polish** — regenerate, Markdown export, per-message copy, keyboard
+  shortcuts, Unicode maths rendering and token accounting.
+- **Assets** — new application icon (PNG + ICO), a regenerated EXE, new Android
+  launcher icons and native splash screens in the app's palette.
+
+### Changed
+
+- **Desktop UI rewritten** — theme-aware palettes, hand-tuned light and dark
+  variants, four accents, 300–360 px sidebar, 2×2 stat cards, auto-sizing
+  composer, wider bubbles and cleaner code blocks.
+- **Android UI rewritten** — splash, dashboard drawer with stats and system
+  status, bottom-sheet settings, dark/light themes, SVG icons, bilingual labels
+  and conversation persistence. Version 1.1.0, versionCode 2.
+- **README and documentation** — new banner, social preview, screenshots,
+  architecture diagrams and honest limitations.
+- **APK size** — 3.7 MB signed release (1.0 was 2.9 MB) after the new UI assets.
+
+### Fixed
+
+- Tool calls are now ordered correctly and streamed without `stream_options`
+  errors during tool loops.
+- LaTeX fragments are converted to readable Unicode instead of leaking into chat.
+- Silent failures in memory, RAG and generation paths now surface as visible
+  notes or dialog errors.
+- PowerShell build scripts no longer emit `NativeCommandError` noise for normal
+  stderr output, and mojibake comments were removed from requirements files.
+
+### Security
+
+- No API key is baked into the EXE or APK, and none is committed.
+- `.env`, keystores, databases and build outputs are gitignored.
+- File writes, Python execution and network tools require explicit permission.
+
 ## [1.0.0] — 2026-10-24
 
 First public release.
@@ -35,4 +105,5 @@ First public release.
 - No API key is baked into the APK or committed to the repository.
 - `.env`, keystore files and local build outputs are gitignored.
 
-[1.0.0]: https://github.com/your-handle/groq-chat/releases/tag/v1.0.0
+[1.1.0]: https://github.com/rhasan2026g-cell/GroqChatbot/releases/tag/v1.1.0
+[1.0.0]: https://github.com/rhasan2026g-cell/GroqChatbot/releases/tag/v1.0.0

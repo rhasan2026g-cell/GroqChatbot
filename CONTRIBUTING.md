@@ -13,10 +13,10 @@ We love your input! We want to make contributing to GroqChatbot as easy and tran
 We use GitHub to host code, to track issues and feature requests, as well as accept pull requests.
 
 1. Fork the repo and create your branch from `main`
-2. If you've added code that should be tested, add tests
+2. If you add behaviour, describe how you verified it in the PR
 3. If you've changed APIs, update the documentation
-4. Ensure the test suite passes
-5. Make sure your code lints
+4. Run the syntax checks below
+5. Make sure your code follows the existing style
 6. Issue that pull request!
 
 ## Setting Up Development Environment
@@ -27,21 +27,26 @@ cd GroqChatbot
 python -m venv .venv
 source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 pip install -r requirements.txt
-pip install pytest
 ```
 
 ## Testing
 
+There is no pytest suite in the repository yet; use these checks before opening
+a pull request:
+
 ```bash
-# Test agent components
+# Python syntax for every module
+python -m py_compile "My Chatbot.py" app.py app_paths.py memory_system.py \
+  rag_system.py agent_tools.py generation.py ui_theme.py ui_widgets.py ui_dialogs.py
+
+# Optional smoke script (memory + tools, no network)
 python test_agent.py
 
-# Run pytest
-python -m pytest -v
-
-# Check syntax
-python -m py_compile "My Chatbot.py" app.py memory_system.py agent_tools.py
+# JavaScript syntax for the Android UI
 node --check android-app/www/app.js
+
+# Launch the desktop app and exercise chat, memory and a tool
+python "My Chatbot.py"
 ```
 
 ## Code Style

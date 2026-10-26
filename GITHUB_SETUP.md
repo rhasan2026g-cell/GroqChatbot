@@ -6,7 +6,7 @@ Follow these steps to create and push this repository to GitHub.
 - **Repository Name:** GroqChatbot
 - **Owner:** rhasan2026g-cell
 - **URL:** https://github.com/rhasan2026g-cell/GroqChatbot.git
-- **Description:** A lightning-fast, bilingual AI Agent powered by Groq with SQLite + sqlite-vec long-term memory. Cross-platform (Desktop PySide6 + Android Capacitor).
+- **Description:** A bilingual (English/বাংলা) AI agent for Windows and Android — Groq streaming, SQLite memory, document Q&A, tools and a creation studio. PySide6 + Capacitor.
 
 ## Quick Setup Commands
 
@@ -43,48 +43,41 @@ git push -u origin main
 After pushing, configure your repository:
 
 ### About Section
-- **Description:** `Lightning-fast bilingual AI Agent powered by Groq with SQLite + sqlite-vec long-term memory, built-in tools, and cross-platform support (PySide6 desktop + Capacitor Android)`
-- **Website:** (optional) Leave blank or add your site
-- **Topics:** Add these tags for discoverability
+- **Description:** `Bilingual (English/বাংলা) AI agent for Windows and Android. Groq LPU streaming, long-term SQLite memory, document Q&A, ten tools, and an image/music/video studio. Built with PySide6 + Capacitor.`
+- **Website:** `https://github.com/rhasan2026g-cell/GroqChatbot`
+- **Topics:** Add these tags for discoverability (GitHub allows 20)
 
 ### Recommended Topics/Tags
 ```
 ai-agent
 groq
-groq-api
+chatbot
 bilingual
 bengali
-bangla
 pyside6
-qt
-capacitor
+desktop-app
 android
+capacitor
 python
 llm
-chatbot
-sqlite
-vector-database
-sqlite-vec
-long-term-memory
-tool-calling
-function-calling
-agent-tools
-streaming
-desktop-app
-mobile-app
-gpt-oss
-qwen
-ai-assistant
 rag
-semantic-search
+long-term-memory
+sqlite-vec
+tool-calling
+image-generation
+music-generation
+local-first
+privacy
+streaming
 ```
 
 ### Release Setup
 1. Go to Releases > Create a new release
-2. Tag version: `v1.0.0`
-3. Release title: `GroqChatbot v1.0.0 - AI Agent with Memory`
-4. Upload `GroqChat-v1.0.apk` as a release asset
-5. Add release notes from CHANGELOG.md
+2. Tag version: `v1.1.0`
+3. Release title: `GroqChatbot 1.1.0 — dashboard, database browser, tool bench, new Android UI`
+4. Upload `GroqChatbot-v1.1.exe` and `GroqChatbot-v1.1.apk` as release assets
+5. Paste `RELEASE_NOTES_v1.1.0.md` as the release body
+6. Upload `docs/social-preview.png` in Settings > General > Social preview
 
 ## Pre-Push Checklist
 
@@ -93,7 +86,7 @@ semantic-search
 - [ ] LICENSE file is present
 - [ ] No API keys in code
 - [ ] Dependencies listed in requirements.txt
-- [ ] Tests pass locally
+- [ ] Smoke checks pass locally
 - [ ] .gitignore is comprehensive
 
 ## Troubleshooting
