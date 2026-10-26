@@ -1,58 +1,69 @@
-# GroqChatbot v1.0.0 - Release Notes
+# GroqChatbot v1.0.0 — Release Notes
 
-**Release Date:** October 25, 2026
+> **Historical.** v1.0.0 was the first public build and has been superseded by
+> **[v1.1.0](RELEASE_NOTES_v1.1.0.md)**, which redesigned both interfaces and
+> added the dashboard, database browser, tool workbench and creation studio.
+> The v1.0 APKs are no longer distributed — download the current release from
+> <https://github.com/rhasan2026g-cell/GroqChatbot/releases/latest>.
 
-## 🎉 What's New
+**Release date:** October 25, 2026
 
-### 🤖 AI Agent Features
-- **True AI Agent** - Tool calling, reasoning, and autonomous task execution
-- **Long-Term Memory** - SQLite + sqlite-vec powered semantic memory system
-- **RAG System** - Upload and chat with PDF, TXT, DOCX documents
-- **Built-in Tools** - Web search, calculator, file operations, code execution, weather, and more
+## What shipped
 
-### 🎨 AI Generation
-- **Image Generation** - Create images with Flux, Stable Diffusion XL, SD 1.5
-- **Music Generation** - Generate AI music with MusicGen, AudioGen
-- **Illustration Generation** - Create custom artwork and illustrations
-- **Video Generation (Beta)** - AI video generation with Hunyuan Video
-- **Multi-Provider Support** - HuggingFace, Replicate, Stability AI, Fal.ai, Together AI, OpenRouter
+### Chat
 
-### 🌐 Core Features
-- **Bilingual Support** - Seamless English & বাংলা (Bengali)
-- **Lightning Fast** - Powered by Groq's LPU inference with streaming
-- **Cross-Platform** - PySide6 desktop app + Capacitor Android app
-- **Privacy First** - No telemetry, API keys stay on your device
-- **Beautiful UI** - Modern dark theme with smooth animations
+- **Bilingual UI** — every label switches between English and বাংলা; replies follow
+  the language you write in.
+- **Streaming replies** over SSE, with a live caret, stop button and Markdown
+  rendering including fenced code blocks.
+- **Three Groq models**: GPT-OSS 20B (fast), GPT-OSS 120B (smart) and Qwen 3.8 27B.
+- **Guided key setup** with `gsk_` validation, live test, show/hide and a masked
+  preview. Keys were never baked into the builds.
 
-## 📦 Downloads
+### Platforms
 
-- **Windows/Linux/macOS**: Clone repo and run with Python
-- **Android APK**: `GroqChatbot-v1.0.apk` (2.9+ MB) - Direct install
-- **Android Debug**: `GroqChatbot-v1.0-debug.apk` - For testing
+- **Windows desktop** — PySide6 single-file EXE, no Python required.
+- **Android** — Capacitor 6 WebView client, signed APK, tested at 390×844.
 
-## 🔧 Requirements
+### Groundwork for 1.1
 
-- Python 3.10+
-- Groq API key (free at console.groq.com)
-- Optional: HuggingFace API key for generation features
+The 1.0 tree already contained the memory, RAG, tool and generation modules, but
+they were not yet exposed in the interface. v1.1 finished that work.
 
-## 🚀 Getting Started
+## Downloads at the time
+
+| Platform | File |
+| --- | --- |
+| Windows | desktop build run from source — no EXE was attached to the 1.0 release |
+| Android | `GroqChatbot-v1.0.apk` (2.9 MB, debug APK also built) |
+
+Both files were removed from the repository when v1.1.0 shipped. Use the latest
+release instead.
+
+## Requirements
+
+- Python 3.10+ when running from source (the EXE bundles its own runtime)
+- A free Groq API key from <https://console.groq.com/keys>
+- Optional: HuggingFace or Replicate key for image generation
+
+## Getting started
 
 ```bash
 git clone https://github.com/rhasan2026g-cell/GroqChatbot.git
 cd GroqChatbot
 pip install -r requirements.txt
 cp .env.example .env
-# Add your GROQ_API_KEY to .env
+# add GROQ_API_KEY=... to .env
 python "My Chatbot.py"
 ```
 
-## 📝 Full Changelog
+## Full changelog
 
-See [CHANGELOG.md](CHANGELOG.md) for complete details.
+See [CHANGELOG.md](CHANGELOG.md).
 
-## 🙏 Acknowledgments
+## Acknowledgements
 
-Thanks to Groq, HuggingFace, and the open-source community!
+Thanks to Groq for the fast inference API and to the maintainers of PySide6,
+SQLite, sqlite-vec, sentence-transformers and Capacitor.
 
-**Full Changelog**: https://github.com/rhasan2026g-cell/GroqChatbot/commit/4c3ac3d72f663e06f4b614594bd5e5be5774491a
+**Full changelog:** <https://github.com/rhasan2026g-cell/GroqChatbot/commit/4c3ac3d72f663e06f4b614594bd5e5be5774491a>

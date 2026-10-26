@@ -7,7 +7,7 @@ packaged with Capacitor 6.
 |---|---|
 | Package | `com.rbk.groqchat` |
 | Version | 1.1.0 (versionCode 2) |
-| Size | ~3.7 MB |
+| Size | ~3.5 MB (3,684,960 bytes) |
 | Min Android | 5.1 (API 22) |
 | Target | Android 14 (API 34) |
 | Signing | local release keystore, self-signed (v1 + v2 schemes) |
@@ -34,8 +34,8 @@ studio are desktop features.
 
 | | |
 |---|---|
-| ![Dark](../docs/screenshots/android-dark.png) | ![Light](../docs/screenshots/android-light.png) |
-| ![Bengali](../docs/screenshots/android-bengali.png) | ![Drawer](../docs/screenshots/android-drawer.png) |
+| ![Dark](docs/screenshots/android-dark.png) | ![Light](docs/screenshots/android-light.png) |
+| ![Bengali](docs/screenshots/android-bengali.png) | ![Drawer](docs/screenshots/android-drawer.png) |
 
 ## Install on the phone
 
@@ -45,6 +45,17 @@ studio are desktop features.
 3. Tap the file. Android will warn that the app is from an unknown source — allow
    "Install unknown apps" for whichever app opened it (Files, Chrome, …).
 4. Open **GroqChatbot** from the app drawer.
+
+The APK is also committed at the repository root, so you can download it without
+opening the Releases page.
+
+Verify the build if you like:
+
+```bash
+sha256sum GroqChatbot-v1.1.apk
+# a265e2790e9e5b1ce81bc2dd72d52af85d7d466b30ac107d9619d9b7f9e4e4f0
+apksigner verify --print-certs GroqChatbot-v1.1.apk
+```
 
 Because the APK is self-signed rather than distributed through the Play Store,
 Play Protect may show a "scan for harmful apps" prompt. Tap **Install anyway**
@@ -131,6 +142,25 @@ android-app/
         └── res/               icons, splash screens, theme
 ```
 
+## Troubleshooting
+
+**"App not installed"** — an older copy signed with a different key is already on
+the phone, or the download was truncated. Uninstall the old app, re-download, and
+check the SHA-256 above.
+
+**Play Protect blocks the install** — tap *More details → Install anyway*. This is
+the standard warning for any APK outside the Play Store.
+
+**"Invalid API key"** — the key was revoked or copied with extra characters. Open
+**⚙ → Groq API key**, paste it again (a whole `GROQ_API_KEY=…` line is accepted),
+and tap **Save & test**.
+
+**Replies stop mid-sentence** — that is usually the network. The partial answer is
+kept; tap send again or use the stop button before retrying.
+
+**Gradle fails with "Unsupported class file major version"** — you are on the
+wrong JDK. Capacitor 6 needs **JDK 17** (`JAVA_HOME` must point at it), not 21.
+
 ## Notes
 
 - Launcher icons and native splash screens use the app palette (gradient tile on
@@ -141,3 +171,5 @@ android-app/
   backend proxy.
 - The Android UI is verified in a headless Chromium session at 390×844: all
   screens render with zero JavaScript errors.
+- Release 1.1.0 is published at
+  <https://github.com/rhasan2026g-cell/GroqChatbot/releases/tag/v1.1.0>.

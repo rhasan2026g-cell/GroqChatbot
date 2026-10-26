@@ -49,14 +49,14 @@ ship as fresh signed builds.
 ### Changed
 
 - **Desktop UI rewritten** — theme-aware palettes, hand-tuned light and dark
-  variants, four accents, 300–360 px sidebar, 2×2 stat cards, auto-sizing
+  variants, five accents, 300–360 px sidebar, 2×2 stat cards, auto-sizing
   composer, wider bubbles and cleaner code blocks.
 - **Android UI rewritten** — splash, dashboard drawer with stats and system
   status, bottom-sheet settings, dark/light themes, SVG icons, bilingual labels
   and conversation persistence. Version 1.1.0, versionCode 2.
 - **README and documentation** — new banner, social preview, screenshots,
   architecture diagrams and honest limitations.
-- **APK size** — 3.7 MB signed release (1.0 was 2.9 MB) after the new UI assets.
+- **APK size** — 3.5 MB signed release (1.0 was 2.9 MB) after the new UI assets.
 
 ### Fixed
 
@@ -73,6 +73,30 @@ ship as fresh signed builds.
 - No API key is baked into the EXE or APK, and none is committed.
 - `.env`, keystores, databases and build outputs are gitignored.
 - File writes, Python execution and network tools require explicit permission.
+- CI now fails if a keystore is tracked or a `gsk_…` token appears in the source.
+
+### Documentation
+
+- `README.md` rebuilt around the 1.1 interface: banner, badge row with CI status,
+  full screenshot gallery, Mermaid architecture and message-flow diagrams, tool
+  and provider tables, build instructions, honest limitations, FAQ and topics.
+- `SECURITY.md` rewritten: supported versions, private advisory flow, data map,
+  network destinations, tool permissions, known considerations and hardening.
+- `CONTRIBUTING.md` rewritten: project map, bilingual and no-silent-failure rules,
+  CI-equivalent checks, PR process and a maintainer release checklist.
+- `ANDROID.md` updated for 1.1.0 with checksums, install troubleshooting and the
+  published release link; `GITHUB_ABOUT.md` and `GITHUB_SETUP.md` now describe the
+  live repository, the 20 applied topics and a repeatable release runbook.
+- Added `RELEASE_NOTES_v1.1.0.md`; `RELEASE_NOTES_v1.0.0.md` marked historical
+  with working links.
+- Release assets published: `GroqChatbot-v1.1.exe` (86.5 MB) and
+  `GroqChatbot-v1.1.apk` (3.5 MB), with SHA-256 checksums documented.
+
+### Published
+
+- Tag `v1.1.0` and GitHub release
+  <https://github.com/rhasan2026g-cell/GroqChatbot/releases/tag/v1.1.0>
+  (marked Latest).
 
 ## [1.0.0] — 2026-10-24
 
